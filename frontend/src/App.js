@@ -17,8 +17,8 @@ function App() {
   useEffect(() => {
     async function getAllPets() {
       try {
-        const res = await axios.get('http://localhost:8000/pets');
-        console.log(res.data);
+        const token = JSON.parse(localStorage.getItem('token'))
+        const res = await axios.get('http://localhost:8000/pets', {headers: {Authorization: `Bearer ${token}`}});
         setPetList(res.data);
       } catch (err) {
         console.log(err);

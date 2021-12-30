@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import SignupModal from './SignupModal';
 import LoginModal from './LoginModal';
 import AppContext from '../context/appContext';
 import { Button } from 'react-bootstrap';
-import '../App.css'
+import '../App.css';
 
 export default function HomePage() {
   const [showLogin, setShowLogin] = useState(false);
@@ -12,18 +12,19 @@ export default function HomePage() {
   const handleClose = (action) => {
     if (action === 'login') {
       setShowLogin(false);
-    } else {
+    } else if (action === 'signup') {
       setShowSignup(false);
     }
   };
   const handleShow = (action) => {
-    console.log(action);
     if (action === 'login') {
       setShowLogin(true);
-    } else {
+    } else if (action === 'signup') {
       setShowSignup(true);
     }
   };
+
+
   return (
     <div className='buttonContainer'>
       <Button variant='primary' name='login' className='login' onClick={() => handleShow('login')}>
