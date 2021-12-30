@@ -1,24 +1,20 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Button, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Stack, Box, Typography, Container, Link } from '@mui/material';
 import axios from 'axios';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 import PetCard from './PetCard';
 import AppContext from '../context/appContext';
 
 export default function PetsPage() {
-  const appContext = useContext(AppContext);
+  const { petList } = useContext(AppContext);
 
   useEffect(() => {
-    console.log(appContext);
+    console.log(petList);
   });
 
   return (
     <div>
-      <Grid container spacing={4}>
-        {appContext.petList.map((pet) => (
-          <PetCard pet={pet} />
-        ))}
-      </Grid>
+      <h1>Pets Page</h1>
+
     </div>
   );
 }
