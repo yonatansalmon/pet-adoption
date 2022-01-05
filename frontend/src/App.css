@@ -1,9 +1,122 @@
-.buttonContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.login,.signup {
-    margin: 4px
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  padding: 0 !important;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login,
+.signup {
+  margin: 4px;
+}
+
+.loggedHomePageContainer {
+  display: flex;
+  margin: 8px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.accordionContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.accordion {
+  max-width: 50%;
+}
+.accordion-button {
+  min-width: 638px;
+}
+
+.accordion-button.collapsed {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.accordion-item {
+  margin: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.navbar-nav > a {
+  margin: 8px;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchBtn {
+  align-self: center;
+}
+
+.badgeLabel {
+  align-self: flex-start;
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+.petStatusContainer,
+.slider {
+  margin: 6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-direction: row !important;
+}
+
+.pretty.p-switch {
+  margin-right: 1.5em;
+}
+
+
+.accordionBody {
+  display: flex;
+  justify-content:center
+}
+.accordionBody > div.MuiBox-root {
+  flex: 1
+}
+
+
+.statusLabel {
+  margin-left: 0 !important;
+}
+
+.radioContainer {
+  flex-direction: row !important;
+  margin: 7px !important;
+}
+
+.petCardsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 15px;
+  row-gap: 15px;
+
+}
+
+.petCard {
+  margin: 12px 0;
 }

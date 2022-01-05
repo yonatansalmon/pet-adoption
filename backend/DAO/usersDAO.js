@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 let usersCollection;
 
 class UsersDAO {
@@ -5,7 +6,7 @@ class UsersDAO {
     if (usersCollection) return;
     try {
       usersCollection = await client.db('pet-adoption').collection('users');
-        // usersCollection.deleteMany({})
+      // usersCollection.deleteMany({})
     } catch (err) {
       console.log(err);
     }
@@ -24,6 +25,16 @@ class UsersDAO {
   static async getUserByEmail(email) {
     try {
       const queryResult = await usersCollection.findOne({ email: email });
+      return queryResult;
+    } catch (err) {
+      console.log(err);
+      return { error: err };
+    }
+  }
+
+  static async getUserById(id) {
+    try {
+      const queryResult = await usersCollection.findOne({ _id: new ObjectId(id) });
       return queryResult;
     } catch (err) {
       console.log(err);

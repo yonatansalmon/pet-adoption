@@ -9,4 +9,13 @@ const getAllPetsController = async (req, res) => {
   }
 };
 
-module.exports = { getAllPetsController };
+const getSearchedPetsController = async (req, res) => {
+  try {
+    const queryResult = await PetsDAO.getSearchedPets(req.query);
+    res.send(queryResult);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+module.exports = { getAllPetsController, getSearchedPetsController };

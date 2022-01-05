@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Modal, Button, Form } from 'react-bootstrap';
+import AppContext from '../context/appContext'
 
 export default function LoginModal({ show, handleClose, handleShow }) {
   const [user, setUser] = useState({});
+  const {setCurrentUser} = useContext(AppContext)
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -18,7 +20,7 @@ export default function LoginModal({ show, handleClose, handleShow }) {
       const { firstName, email, token } = res.data;
       if (token) {
         localStorage.setItem('token', JSON.stringify(token));
-        handleClose('login');
+        setCurrentUser({firstName, email})
       }
     } catch (err) {
       console.log(err);
@@ -38,7 +40,7 @@ export default function LoginModal({ show, handleClose, handleShow }) {
 
           <Form.Group className='mb-3' controlId='formBasicPassword'>
             <Form.Label>Password</Form.Label>
-            <Form.Control type='password' placeholder='Password' name='password' onChange={handleChange} />
+            <Form.Control type='password' placeholder='Password' name='password'autoComplete='current-passsword' onChange={handleChange} />
           </Form.Group>
 
           <Button variant='primary' type='submit'>

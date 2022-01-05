@@ -30,6 +30,17 @@ class PetsDAO {
       return { error: err };
     }
   }
+
+  static async getSearchedPets(queryParams) {
+    try {
+      console.log(queryParams);
+      const queryResult = await petsCollection.find(queryParams).toArray();
+      return queryResult;
+    } catch (err) {
+      console.log(err);
+      return { error: err };
+    }
+  }
 }
 
 module.exports = PetsDAO;

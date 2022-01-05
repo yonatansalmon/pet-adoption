@@ -8,7 +8,7 @@ const getAllUsers = (req, res) => {
 
 const login = (req, res) => {
   const { user, password } = req.body;
-  const { firstName, email, hashedPassword } = user
+  const { firstName, email, hashedPassword } = user;
   bcrypt.compare(password, hashedPassword, function (err, result) {
     if (err) {
       res.status(400).send('Passwords Dont Match');
@@ -31,4 +31,10 @@ const signUp = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, login, signUp };
+const getCurrentUser = async (req, res) => {
+  const { decoded } = req.body;
+  const currentUser = UsersDAO.getCurrentUser(decoded.id);
+  res.send(currentUser);
+};
+
+module.exports = { getAllUsers, login, signUp, getCurrentUser };
