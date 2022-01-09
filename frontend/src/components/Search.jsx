@@ -10,11 +10,11 @@ import axios from 'axios';
 
 import '../App.css';
 
-export default function Search({setSearchedPets}) {
+export default function Search({ setSearchedPets }) {
   const { petList } = useContext(AppContext);
   const [petTypes, setPetTypes] = useState([]);
   const [petData, setPetData] = useState({ type: '', name: '', weight: 70, height: 70 });
-  const [status, setStatus] = useState({ status:'' });
+  const [status, setStatus] = useState({ status: '' });
 
   useEffect(() => {
     let uniquePetTypes = petList.map((pet) => pet.type).filter((pet, index, array) => array.indexOf(pet) === index);
@@ -23,7 +23,7 @@ export default function Search({setSearchedPets}) {
 
   const handleStatusChange = (e) => {
     console.log(e.target.value);
-    setStatus({status:e.target.value});
+    setStatus({ status: e.target.value });
   };
 
   const handlePetDataChange = (e) => {
@@ -44,9 +44,9 @@ export default function Search({setSearchedPets}) {
 
       const res = await axios.get(
         `http://localhost:8000/pets?type=${petToSearch.type}&name=${petToSearch.name}&weight=${petToSearch.weight}&height=${petToSearch.height}&adoptionStatus=${petToSearch.status}`,
-        { headers: { Authorization: `Bearer ${token}` }}
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-      setSearchedPets(res.data)
+      setSearchedPets(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -54,7 +54,7 @@ export default function Search({setSearchedPets}) {
   return (
     <div className='searchContainer'>
       <div className='accordionContainer'>
-      <Accordion >
+        <Accordion>
           <Accordion.Item eventKey='0'>
             <Accordion.Header>Basic Search</Accordion.Header>
             <Accordion.Body className='accordionBody'>
@@ -63,10 +63,7 @@ export default function Search({setSearchedPets}) {
                   <Badge className='badgeLabel'>Pet Type:</Badge>
                   <MenuItem value={'Any'}></MenuItem>
                   <Select label='Type' name='type' onChange={handlePetDataChange} defaultValue={'Any'}>
-                  <MenuItem value={'Any'}>
-                    Any
-                          
-                        </MenuItem>
+                    <MenuItem value={'Any'}>Any</MenuItem>
                     {petTypes &&
                       petTypes.length > 0 &&
                       petTypes.map((type) => (
@@ -80,7 +77,7 @@ export default function Search({setSearchedPets}) {
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey='1'>
-          <Accordion.Header>Advanced Search</Accordion.Header>
+            <Accordion.Header>Advanced Search</Accordion.Header>
             <Accordion.Body>
               <>
                 <Badge className='badgeLabel'>Pet Name:</Badge>
@@ -104,6 +101,8 @@ export default function Search({setSearchedPets}) {
                     value={petTypes.status}
                     onChange={handleStatusChange}
                   >
+                    <FormControlLabel value='Any' name='any' control={<Radio size='small' />} label='Any' />
+
                     <FormControlLabel value='Available' name='available' control={<Radio size='small' />} label='Available' />
                     <FormControlLabel value='Fostered' name='fostered' control={<Radio size='small' />} label='Fostered' />
                     <FormControlLabel value='Adopted' name='adopted' control={<Radio size='small' />} label='Adopted' />
@@ -146,4 +145,3 @@ export default function Search({setSearchedPets}) {
     </div>
   );
 }
-

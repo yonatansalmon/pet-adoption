@@ -1,3 +1,5 @@
+const { ObjectId } = require('mongodb');
+
 let petsCollection;
 
 class PetsDAO {
@@ -35,6 +37,16 @@ class PetsDAO {
     try {
       console.log(queryParams);
       const queryResult = await petsCollection.find(queryParams).toArray();
+      return queryResult;
+    } catch (err) {
+      console.log(err);
+      return { error: err };
+    }
+  }
+
+  static async getPetById(id) {
+    try {
+      const queryResult = await petsCollection.findOne({ _id: ObjectId(id) });
       return queryResult;
     } catch (err) {
       console.log(err);

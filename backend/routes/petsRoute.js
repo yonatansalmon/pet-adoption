@@ -8,4 +8,7 @@ router.get('/all', verifyToken, PetsController.getAllPetsController);
 
 router.get('/', verifyToken, filterSearch, PetsController.getSearchedPetsController);
 
+router.get('/:id', PetsController.getPetByIdController);
+
+
 module.exports = router;

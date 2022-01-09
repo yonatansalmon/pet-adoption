@@ -18,4 +18,15 @@ const getSearchedPetsController = async (req, res) => {
   }
 };
 
-module.exports = { getAllPetsController, getSearchedPetsController };
+
+const getPetByIdController = async (req, res) => {
+  try {
+    const {id} = req.params
+    const queryResult = await PetsDAO.getPetById(id);
+    res.send(queryResult);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+module.exports = { getAllPetsController, getSearchedPetsController,getPetByIdController  };
