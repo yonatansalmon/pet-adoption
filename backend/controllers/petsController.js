@@ -1,4 +1,6 @@
-const PetsDAO = require('../DAO/petsDAO.js');
+const PetsDAO = require("../DAO/petsDAO.js");
+const UsersDAO = require("../DAO/usersDAO.js");
+
 
 const getAllPetsController = async (req, res) => {
   try {
@@ -18,15 +20,33 @@ const getSearchedPetsController = async (req, res) => {
   }
 };
 
-
 const getPetByIdController = async (req, res) => {
   try {
-    const {id} = req.params
-    const queryResult = await PetsDAO.getPetById(id);
+    const { petId } = req.params;
+    const queryResult = await PetsDAO.getPetById(petId);
     res.send(queryResult);
   } catch (err) {
     res.status(500).send(err);
   }
 };
 
-module.exports = { getAllPetsController, getSearchedPetsController,getPetByIdController  };
+const adoptFosterController = async (req, res) => {
+  try {
+    const { petId } = req.params;
+    const {status, userId} = req.body
+    const petData = {petId, status}
+    const updateUser = await UsersDAO.updateUserById(userId, petData);
+    const updatePetStatus = await PetsDAO.updatePetStatus(petId, status);
+    res.send('queryResult');
+  } catch (err) {
+    console.log(err)
+    res.status(500).send(err);
+  }
+};
+
+module.exports = {
+  getAllPetsController,
+  getSearchedPetsController,
+  getPetByIdController,
+  adoptFosterController,
+};

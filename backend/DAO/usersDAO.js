@@ -1,11 +1,11 @@
-const { ObjectId } = require('mongodb');
+const { ObjectId } = require("mongodb");
 let usersCollection;
 
 class UsersDAO {
   static async injectConnection(client) {
     if (usersCollection) return;
     try {
-      usersCollection = await client.db('pet-adoption').collection('users');
+      usersCollection = await client.db("pet-adoption").collection("users");
       // usersCollection.deleteMany({})
     } catch (err) {
       console.log(err);
@@ -34,8 +34,26 @@ class UsersDAO {
 
   static async getUserById(id) {
     try {
-      const queryResult = await usersCollection.findOne({ _id: new ObjectId(id) });
+      const queryResult = await usersCollection.findOne({
+        _id: new ObjectId(id),
+      });
       return queryResult;
+    } catch (err) {
+      console.log(err);
+      return { error: err };
+    }
+  }
+
+  static async updateUserById(userId, petData) {
+    try {
+      const {status, petId} = petData;
+
+      const queryResult = await usersCollection.updateOne(
+        { _id: new ObjectId(userId) },
+        { $push: { [status]: petId} },
+        { upsert: true }
+      );
+      return "queryResult";
     } catch (err) {
       console.log(err);
       return { error: err };

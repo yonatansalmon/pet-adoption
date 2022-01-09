@@ -53,6 +53,16 @@ class PetsDAO {
       return { error: err };
     }
   }
+
+  static async updatePetStatus(petId, status) {
+    try {
+      const queryResult = await petsCollection.findOneAndUpdate({ _id: ObjectId(petId)}, {$set: {adoptionStatus: status.charAt(0).toUpperCase() + status.slice(1) + 'ed'}});
+      return queryResult;
+    } catch (err) {
+      console.log(err);
+      return { error: err };
+    }
+  }
 }
 
 module.exports = PetsDAO;

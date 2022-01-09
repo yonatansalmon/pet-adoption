@@ -11,7 +11,7 @@ export default function PetCard({ pet }) {
 
   return (
     <Card onClick={()=>navigate(`/pet/${pet._id}`)} className='petCard'>
-      <CardMedia component='img' alt={pet.name} image={pet.picture} sx={{ 'object-fit': 'scale-down', my: 3 }} />
+      <CardMedia component='img' alt={pet.name} image={pet.picture} sx={{ 'objectFit': 'scale-down', my: 3 }} />
       <CardContent>
         <Typography gutterBottom variant='h5' component='div'>
           {pet.name}
