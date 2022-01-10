@@ -13,28 +13,29 @@ import '../App.css';
 export default function AddPet({ setSearchedPets }) {
   const { petList } = useContext(AppContext);
   const [petTypes, setPetTypes] = useState([]);
-  const [petData, setPetData] = useState({ type: '', name: '', weight: 70, height: 70 });
-  const [status, setStatus] = useState({ status: '' });
-  const [selectedFile, setSelectedFile] = useState();
+  const [petImage, setPetImage] = useState();
+  const [petData, setPetData] = useState({
+    type: '',
+    name: '',
+    weight: 70,
+    height: 70,
+    hypoallergenic: false,
+    dietaryRestrictions: false,
+    color: '',
+    breed: '',
+  });
 
   useEffect(() => {
     let uniquePetTypes = petList.map((pet) => pet.type).filter((pet, index, array) => array.indexOf(pet) === index);
     setPetTypes(uniquePetTypes);
   }, []);
 
-  const handleStatusChange = (e) => {
-    console.log(e.target.value);
-    setStatus({ status: e.target.value });
+  const handleImageUpload = (e) => {
+    console.log(e.target.files);
+    setPetImage(e.target.files[0]);
   };
 
-  const handleImageUpload = (e) => {
-    console.log(e.target.files)
-     setSelectedFile(e.target.files[0]);
-   };
-
   const handlePetDataChange = (e) => {
-    e.preventDefault();
-
     setPetData({
       ...petData,
       [e.target.name]: e.target.value,
@@ -43,18 +44,11 @@ export default function AddPet({ setSearchedPets }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const petToSearch = { ...petData, ...status };
-    try {
-      const token = JSON.parse(localStorage.getItem('token'));
-      console.log(petToSearch);
 
-      const res = await axios.get(
-        `http://localhost:8000/pets?type=${petToSearch.type}&name=${petToSearch.name}&weight=${petToSearch.weight}&height=${petToSearch.height}&adoptionStatus=${petToSearch.status}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setSearchedPets(res.data);
-    } catch (err) {
-      console.log(err);
+    const formData = new FormData();
+    formData.append('picture', petImage);
+    for (let key in petData) {
+      formData.append(key, petData[key]);
     }
   };
   return (
@@ -91,56 +85,35 @@ export default function AddPet({ setSearchedPets }) {
 
       <Badge className='badgeLabel addPetBadge'>Adoption Status:</Badge>
       <div>
-        <RadioGroup
-          className='radioContainer'
-          aria-label='gender'
-          name='controlled-radio-buttons-group'
-          value={petTypes.status}
-          onChange={handleStatusChange}
-        >
-          <FormControlLabel value='Any' name='any' control={<Radio size='small' />} label='Any' />
+        <RadioGroup className='radioContainer' name='controlled-radio-buttons-group' onChange={handlePetDataChange}>
+          <FormControlLabel value='any' name='adoptionStatus' control={<Radio size='small' />} label='Any' />
 
-          <FormControlLabel value='Available' name='available' control={<Radio size='small' />} label='Available' />
-          <FormControlLabel value='Fostered' name='fostered' control={<Radio size='small' />} label='Fostered' />
-          <FormControlLabel value='Adopted' name='adopted' control={<Radio size='small' />} label='Adopted' />
+          <FormControlLabel value='available' name='adoptionStatus' control={<Radio size='small' />} label='Available' />
+          <FormControlLabel value='fostered' name='adoptionStatus' control={<Radio size='small' />} label='Fostered' />
+          <FormControlLabel value='adopted' name='adoptionStatus' control={<Radio size='small' />} label='Adopted' />
         </RadioGroup>
       </div>
       <div>
-        <Badge className='badgeLabel addPetBadge'>Hypoallergenic: </Badge>
+        <Badge className='badgeLabel addPetBadge'>Hypoallergenic:</Badge>
 
-        <RadioGroup
-          className='radioContainer'
-          aria-label='gender'
-          name='controlled-radio-buttons-group'
-          value={petTypes.status}
-          onChange={handleStatusChange}
-        >
-          <FormControlLabel value='Any' name='any' control={<Radio size='small' />} label='Any' />
-
-          <FormControlLabel value='Available' name='available' control={<Radio size='small' />} label='Available' />
-          <FormControlLabel value='Adopted' name='adopted' control={<Radio size='small' />} label='Adopted' />
+        <RadioGroup className='radioContainer' name='controlled-radio-buttons-group' onChange={handlePetDataChange}>
+          <FormControlLabel value='yes' name='hypoallergenic' control={<Radio size='small' />} label='Yes' />
+          <FormControlLabel value='no' name='hypoallergenic' control={<Radio size='small' />} label='No' />
         </RadioGroup>
       </div>
       <div>
-        <Badge className='badgeLabel addPetBadge'>Dietary Restrictions</Badge>
+        <Badge className='badgeLabel addPetBadge'>Dietary Restrictions:</Badge>
 
-        <RadioGroup
-          className='radioContainer'
-          aria-label='gender'
-          name='controlled-radio-buttons-group'
-          value={petTypes.status}
-          onChange={handleStatusChange}
-        >
-          <FormControlLabel value='Any' name='any' control={<Radio size='small' />} label='Any' />
-
-          <FormControlLabel value='Available' name='available' control={<Radio size='small' />} label='Available' />
-          <FormControlLabel value='Adopted' name='adopted' control={<Radio size='small' />} label='Adopted' />
+        <RadioGroup className='radioContainer' name='controlled-radio-buttons-group' onChange={handlePetDataChange}>
+          <FormControlLabel value='yes' name='dietaryRestrictions' control={<Radio size='small' />} label='Yes' />
+          <FormControlLabel value='no' name='dietaryRestrictions' control={<Radio size='small' />} label='No' />
         </RadioGroup>
       </div>
       <div style={{ maxWidth: '50%', display: 'flex', flexDirection: 'column' }}>
-        <div>
-          <label htmlFor='color'>Color</label>
-          <input type='color' id='color' name='color' />
+        <div className='colorContainer'>
+          <Badge className='badgeLabel addPetBadge'>Color:</Badge>
+
+          <input onChange={handlePetDataChange} type='color' id='color' name='color' />
         </div>
         <Badge className='badgeLabel'>Height:</Badge>
 
@@ -166,7 +139,7 @@ export default function AddPet({ setSearchedPets }) {
           className='slider'
           name='height'
         />
-        <Badge className='badgeLabel addPetBadge'>Pet Name:</Badge>
+        <Badge className='badgeLabel addPetBadge'>Breed:</Badge>
 
         <InputGroup className='breedInputContainer' className=' breedInputContainer my-3 ms-1'>
           <FormControl
