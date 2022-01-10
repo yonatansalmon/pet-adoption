@@ -1,8 +1,10 @@
 import React from 'react'
+import AddPet from './AddPet'
 
-export default function Admin() {
+export default function AdminPage() {
     return (
         <div>
+            <AddPet/>
             
         </div>
     )

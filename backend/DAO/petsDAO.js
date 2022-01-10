@@ -35,7 +35,6 @@ class PetsDAO {
 
   static async getSearchedPets(queryParams) {
     try {
-      console.log(queryParams);
       const queryResult = await petsCollection.find(queryParams).toArray();
       return queryResult;
     } catch (err) {
@@ -56,7 +55,7 @@ class PetsDAO {
 
   static async updatePetStatus(petId, status) {
     try {
-      const queryResult = await petsCollection.findOneAndUpdate({ _id: ObjectId(petId)}, {$set: {adoptionStatus: status.charAt(0).toUpperCase() + status.slice(1) + 'ed'}});
+      const queryResult = await petsCollection.updateOne({ _id:new ObjectId(petId)}, {$set: {adoptionStatus: status.charAt(0).toUpperCase() + status.slice(1)}});
       return queryResult;
     } catch (err) {
       console.log(err);

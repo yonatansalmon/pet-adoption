@@ -12,7 +12,6 @@ exports.verifyToken = (req, res, next) => {
       res.status(401).send('Invalid Token');
       return;
     }
-    console.log(decoded)
     req.body.userId = decoded.id;
     next();
   });

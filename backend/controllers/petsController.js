@@ -37,7 +37,10 @@ const adoptFosterController = async (req, res) => {
     const petData = {petId, status}
     const updateUser = await UsersDAO.updateUserById(userId, petData);
     const updatePetStatus = await PetsDAO.updatePetStatus(petId, status);
-    res.send('queryResult');
+    console.log('USER', updateUser)
+    console.log('STatus', updatePetStatus)
+
+    res.send({updateUser, updatePetStatus});
   } catch (err) {
     console.log(err)
     res.status(500).send(err);

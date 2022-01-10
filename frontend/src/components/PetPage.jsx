@@ -10,6 +10,7 @@ export default function PetsPage() {
   const { token } = useContext(AppContext);
   const [pet, setPet] = useState({});
   const [expanded, setExpanded] = useState(false);
+  const [fosteredAdopted, setFosteredAdopted] = useState('');
 
   const { id } = useParams();
 
@@ -33,6 +34,11 @@ export default function PetsPage() {
         }
       );
       console.log(res.data);
+      const {updatePetStatus, updateUser} = res.data;
+      if(updatePetStatus.acknowledged && updateUser.acknowledged) {
+        setFosteredAdopted(e.target.name)
+
+      }
     } catch (err) {
       console.log(err);
     }
@@ -81,18 +87,18 @@ export default function PetsPage() {
           <h4>About {pet.name}</h4>
           <p className={expanded ? "expanded" : "bio"}>{pet.bio}</p>
           <p className="seeMore" onClick={expandBio}>
-            {expanded ? " See More" : "See Less"}
+            {expanded ? " See Less" : "See More"}
           </p>
         </div>
 
         <div className="buttonsContainer ">
-          <Button variant="text" name="adopt" onClick={adoptPet}>
+         {fosteredAdopted !== 'adopted' && <Button variant="contained" name="adopted" onClick={adoptPet}>
             Adopt
-          </Button>
-          <Button variant="contained" name="foster" onClick={adoptPet}>
+          </Button>}
+         {fosteredAdopted !== 'fostered' && <Button variant="contained" name="fostered" onClick={adoptPet}>
             Foster
-          </Button>
-          <Button variant="outlined">Save</Button>
+          </Button>}
+          <Button variant="contained">Save</Button>
         </div>
       </Paper>
     </Container>

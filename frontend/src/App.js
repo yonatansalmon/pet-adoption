@@ -10,6 +10,7 @@ import Profile from './components/Profile';
 import PetPage from './components/PetPage';
 
 import React, { useContext, useState, useEffect } from 'react';
+import AdminPage from './components/AdminPage';
 
 function App() {
   const [userList, setUserList] = useState([]);
@@ -48,6 +49,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path='/' element={currentUser.email ? <LoggedHomePage /> : <NotLoggedHomePage />}></Route>
+          <Route path='/admin' element={<AdminPage />}></Route>
           <Route path='/mypets' element={<PetPage />}></Route>
           <Route path='/profile' element={<Profile />}></Route>
           <Route path='/pet/:id' element={<PetPage />}></Route>
