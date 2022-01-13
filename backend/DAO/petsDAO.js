@@ -35,6 +35,7 @@ class PetsDAO {
 
   static async getSearchedPets(queryParams) {
     try {
+      console.log(queryParams)
       const queryResult = await petsCollection.find(queryParams).toArray();
       return queryResult;
     } catch (err) {
@@ -55,7 +56,10 @@ class PetsDAO {
 
   static async updatePetStatus(petId, status) {
     try {
-      const queryResult = await petsCollection.updateOne({ _id:new ObjectId(petId)}, {$set: {adoptionStatus: status.charAt(0).toUpperCase() + status.slice(1)}});
+      const queryResult = await petsCollection.updateOne(
+        { _id: new ObjectId(petId) },
+        { $set: { adoptionStatus: status.charAt(0).toUpperCase() + status.slice(1) } }
+      );
       return queryResult;
     } catch (err) {
       console.log(err);
@@ -65,7 +69,7 @@ class PetsDAO {
 
   static async addPet(newPet) {
     try {
-      const queryResult = await petsCollection.insertOne({ _id:new ObjectId(petId)}, {$set: {adoptionStatus: status.charAt(0).toUpperCase() + status.slice(1)}});
+      const queryResult = await petsCollection.insertOne(newPet);
       return queryResult;
     } catch (err) {
       console.log(err);
@@ -73,8 +77,5 @@ class PetsDAO {
     }
   }
 }
-
-
-
 
 module.exports = PetsDAO;

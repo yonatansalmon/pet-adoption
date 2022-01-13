@@ -11,7 +11,7 @@ import axios from 'axios';
 import '../App.css';
 
 export default function AddPet({ setSearchedPets }) {
-  const { petList } = useContext(AppContext);
+  const { petList, token, addPet } = useContext(AppContext);
   const [petTypes, setPetTypes] = useState([]);
   const [petImage, setPetImage] = useState();
   const [petData, setPetData] = useState({
@@ -21,7 +21,7 @@ export default function AddPet({ setSearchedPets }) {
     height: 70,
     hypoallergenic: false,
     dietaryRestrictions: false,
-    color: '',
+    color: '#1d1616',
     breed: '',
   });
 
@@ -31,7 +31,6 @@ export default function AddPet({ setSearchedPets }) {
   }, []);
 
   const handleImageUpload = (e) => {
-    console.log(e.target.files);
     setPetImage(e.target.files[0]);
   };
 
@@ -49,6 +48,21 @@ export default function AddPet({ setSearchedPets }) {
     formData.append('picture', petImage);
     for (let key in petData) {
       formData.append(key, petData[key]);
+    }
+
+    try {
+      const res = await axios.post('http://localhost:8000/pets/add', formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log(res.data)
+
+      const { acknowledged, insertedId, picture } = res.data;
+      if (acknowledged && insertedId) {
+        addPet({ ...petData, picture });
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
   return (
@@ -154,8 +168,8 @@ export default function AddPet({ setSearchedPets }) {
       </div>
 
       <input onChange={handleImageUpload} type='file' accept='image/png, image/gif, image/jpeg' name='file' id='file'></input>
-      <Button className='searchBtn' variant='contained' onClick={handleSubmit}>
-        Search
+      <Button className='addPetBtn' variant='contained' onClick={handleSubmit}>
+        Add Pet
       </Button>
     </div>
   );

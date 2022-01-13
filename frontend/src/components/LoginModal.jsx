@@ -14,9 +14,9 @@ export default function LoginModal({ show, handleClose, handleShow }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const res = await axios.post('http://localhost:8000/users/login', user);
+      console.log(res.data)
       const { firstName, email, token } = res.data;
       if (token) {
         localStorage.setItem('token', JSON.stringify(token));

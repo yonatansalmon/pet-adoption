@@ -4,7 +4,7 @@ const app = express();
 
 const petsRoute = require('./routes/petsRoute');
 const usersRoute = require('./routes/usersRoute');
-
+app.use(express.static('images'))
 app.use(express.json());
 app.use(cors());
 

@@ -1,6 +1,5 @@
-const PetsDAO = require("../DAO/petsDAO.js");
-const UsersDAO = require("../DAO/usersDAO.js");
-
+const PetsDAO = require('../DAO/petsDAO.js');
+const UsersDAO = require('../DAO/usersDAO.js');
 
 const getAllPetsController = async (req, res) => {
   try {
@@ -13,6 +12,7 @@ const getAllPetsController = async (req, res) => {
 
 const getSearchedPetsController = async (req, res) => {
   try {
+    console.log(req.query)
     const queryResult = await PetsDAO.getSearchedPets(req.query);
     res.send(queryResult);
   } catch (err) {
@@ -33,45 +33,37 @@ const getPetByIdController = async (req, res) => {
 const adoptFosterController = async (req, res) => {
   try {
     const { petId } = req.params;
-    const {status, userId} = req.body
-    const petData = {petId, status}
+    const { status, userId } = req.body;
+    const petData = { petId, status };
     const updateUser = await UsersDAO.updateUserById(userId, petData);
     const updatePetStatus = await PetsDAO.updatePetStatus(petId, status);
-    console.log('USER', updateUser)
-    console.log('STatus', updatePetStatus)
+    console.log('USER', updateUser);
+    console.log('STatus', updatePetStatus);
 
-    res.send({updateUser, updatePetStatus});
+    res.send({ updateUser, updatePetStatus });
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(500).send(err);
   }
 };
-
 
 const addPetController = async (req, res) => {
   try {
-    const { petId } = req.params;
-    const {status, userId} = req.body
-    const petData = {petId, status}
-    const updatePetStatus = await PetsDAO.addPet(newPet);
-    console.log('USER', updateUser)
-    console.log('STatus', updatePetStatus)
 
-    res.send({updateUser, updatePetStatus});
+    const {picture, weight, height} = req.body
+    const addedPet = await PetsDAO.addPet({...req.body, height: Number(height), weight: Number(weight)});
+
+    res.send({...addedPet, picture});
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(500).send(err);
   }
 };
-
-
-
-
 
 module.exports = {
   getAllPetsController,
   getSearchedPetsController,
   getPetByIdController,
   adoptFosterController,
-  addPetController
+  addPetController,
 };

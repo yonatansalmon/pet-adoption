@@ -22,7 +22,6 @@ export default function Search({ setSearchedPets }) {
   }, []);
 
   const handleStatusChange = (e) => {
-    console.log(e.target.value);
     setStatus({ status: e.target.value });
   };
 
@@ -40,12 +39,12 @@ export default function Search({ setSearchedPets }) {
     const petToSearch = { ...petData, ...status };
     try {
       const token = JSON.parse(localStorage.getItem('token'));
-      console.log(petToSearch);
 
       const res = await axios.get(
         `http://localhost:8000/pets?type=${petToSearch.type}&name=${petToSearch.name}&weight=${petToSearch.weight}&height=${petToSearch.height}&adoptionStatus=${petToSearch.status}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
+      console.log(res.data)
       setSearchedPets(res.data);
     } catch (err) {
       console.log(err);

@@ -33,7 +33,6 @@ export default function PetsPage() {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      console.log(res.data);
       const {updatePetStatus, updateUser} = res.data;
       if(updatePetStatus.acknowledged && updateUser.acknowledged) {
         setFosteredAdopted(e.target.name)

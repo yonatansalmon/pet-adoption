@@ -39,12 +39,18 @@ function App() {
         console.log(err);
       }
     }
-    console.log(currentUser);
     getAllPets();
   }, []);
 
+
+  const addPet = (newPet) => {
+    console.log(newPet);
+    const allPets = [...petList, newPet]
+    setPetList(allPets);
+  }
+
   return (
-    <AppContext.Provider value={{ userList, setUserList, petList, setPetList, openModal, setIsOpenModal, setCurrentUser, currentUser, token }}>
+    <AppContext.Provider value={{ userList, setUserList, petList, setPetList, openModal, setIsOpenModal, setCurrentUser, currentUser, token, addPet }}>
       <div className='appContainer'>
         <NavBar />
         <Routes>
