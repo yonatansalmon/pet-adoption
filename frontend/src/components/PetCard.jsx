@@ -8,10 +8,9 @@ import '../App.css';
 export default function PetCard({ pet }) {
   let navigate = useNavigate();
 
-
   return (
-    <Card onClick={()=>navigate(`/pet/${pet._id}`)} className='petCard'>
-      <CardMedia component='img' alt={pet.name} image={pet.picture} sx={{ 'objectFit': 'scale-down', my: 3 }} />
+    <Card onClick={() => navigate(`/pet/${pet._id}`)} className='petCard'>
+      <CardMedia component='img' alt={pet.name} image={pet.picture} sx={{ objectFit: 'scale-down', my: 3 }} />
       <CardContent>
         <Typography gutterBottom variant='h5' component='div'>
           {pet.name}

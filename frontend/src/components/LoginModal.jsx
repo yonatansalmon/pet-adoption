@@ -2,8 +2,11 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Modal, Button, Form } from 'react-bootstrap';
 import AppContext from '../context/appContext'
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginModal({ show, handleClose, handleShow }) {
+  let navigate = useNavigate();
+
   const [user, setUser] = useState({});
   const {setCurrentUser} = useContext(AppContext)
 
@@ -17,10 +20,12 @@ export default function LoginModal({ show, handleClose, handleShow }) {
     try {
       const res = await axios.post('http://localhost:8000/users/login', user);
       console.log(res.data)
-      const { firstName, email, token } = res.data;
+      const { id, firstName, token } = res.data;
       if (token) {
         localStorage.setItem('token', JSON.stringify(token));
-        setCurrentUser({firstName, email})
+        localStorage.setItem('currentUser', JSON.stringify({id, firstName}));
+        setCurrentUser({id, firstName})
+        navigate('/')
       }
     } catch (err) {
       console.log(err);

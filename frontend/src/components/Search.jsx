@@ -44,7 +44,6 @@ export default function Search({ setSearchedPets }) {
         `http://localhost:8000/pets?type=${petToSearch.type}&name=${petToSearch.name}&weight=${petToSearch.weight}&height=${petToSearch.height}&adoptionStatus=${petToSearch.status}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log(res.data)
       setSearchedPets(res.data);
     } catch (err) {
       console.log(err);

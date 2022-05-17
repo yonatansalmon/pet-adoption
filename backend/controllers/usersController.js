@@ -16,7 +16,7 @@ const login = (req, res) => {
     }
     if (result) {
       const token = jwt.sign({ id: user._id }, 'shhhhh');
-      res.send({ firstName, email, token });
+      res.send({ id: user._id, firstName, token });
     }
   });
 };

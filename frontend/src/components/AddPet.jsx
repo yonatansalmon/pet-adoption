@@ -4,13 +4,15 @@ import { Switch } from 'pretty-checkbox-react';
 import { Slider, MenuItem, Box, InputLabel, Select, Button, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import FormControlMUI from '@mui/material/FormControl';
 import AppContext from '../context/appContext';
-import { useAccordionButton } from 'react-bootstrap/AccordionButton';
+import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
 import '../App.css';
 
 export default function AddPet({ setSearchedPets }) {
+  let navigate = useNavigate();
+
   const { petList, token, addPet } = useContext(AppContext);
   const [petTypes, setPetTypes] = useState([]);
   const [petImage, setPetImage] = useState();
@@ -49,17 +51,15 @@ export default function AddPet({ setSearchedPets }) {
     for (let key in petData) {
       formData.append(key, petData[key]);
     }
-
     try {
       const res = await axios.post('http://localhost:8000/pets/add', formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
-
-      console.log(res.data)
-
+      console.log(res.data);
       const { acknowledged, insertedId, picture } = res.data;
       if (acknowledged && insertedId) {
         addPet({ ...petData, picture });
+        navigate(`/`);
       }
     } catch (err) {
       console.log(err);
@@ -86,7 +86,7 @@ export default function AddPet({ setSearchedPets }) {
 
       <Badge className='badgeLabel addPetBadge'>Pet Name:</Badge>
 
-      <InputGroup className='petNameInputContainer' className=' petNameInputContainer my-3 ms-1'>
+      <InputGroup className='petNameInputContainer'>
         <FormControl
           placeholder='Pet Name'
           aria-label='petName'
@@ -96,7 +96,6 @@ export default function AddPet({ setSearchedPets }) {
           onChange={handlePetDataChange}
         />
       </InputGroup>
-
       <Badge className='badgeLabel addPetBadge'>Adoption Status:</Badge>
       <div>
         <RadioGroup className='radioContainer' name='controlled-radio-buttons-group' onChange={handlePetDataChange}>
@@ -155,7 +154,7 @@ export default function AddPet({ setSearchedPets }) {
         />
         <Badge className='badgeLabel addPetBadge'>Breed:</Badge>
 
-        <InputGroup className='breedInputContainer' className=' breedInputContainer my-3 ms-1'>
+        <InputGroup className=' breedInputContainer my-3 ms-1'>
           <FormControl
             placeholder='Breed'
             aria-label='breed'

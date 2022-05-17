@@ -112,6 +112,7 @@ body {
   grid-template-columns: repeat(4, 1fr);
   column-gap: 15px;
   row-gap: 15px;
+  margin: 50px;
 }
 
 .petCard {
@@ -144,7 +145,7 @@ body {
 }
 
 .petContainer {
-  margin-top: 30px; 
+  margin-top: 30px;
 }
 
 hr {
@@ -207,13 +208,12 @@ hr {
 }
 
 .petBioContainer > h4 {
-  justify-self:  flex-start;
-
+  justify-self: flex-start;
 }
 
 .bio {
-  overflow:hidden;
-  display:block;
+  overflow: hidden;
+  display: block;
   white-space: nowrap;
   max-width: 80%;
   text-overflow: ellipsis;
@@ -236,7 +236,6 @@ hr {
   text-overflow: none;
 }
 
-
 .addPetContainer {
   display: flex;
   flex-direction: column;
@@ -254,9 +253,8 @@ hr {
 
 .petNameInput {
   width: 50% !important;
-  flex:none !important;
+  flex: none !important;
 }
-
 
 .colorContainer {
   display: flex;

@@ -10,6 +10,7 @@ export default function NavBar() {
   useEffect(() => {
     return () => setCurrentUser(currentUser);
   }, []);
+  
   return (
     <div>
       <Navbar bg='light' expand='lg'>

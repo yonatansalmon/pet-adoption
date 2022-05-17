@@ -12,7 +12,6 @@ const getAllPetsController = async (req, res) => {
 
 const getSearchedPetsController = async (req, res) => {
   try {
-    console.log(req.query)
     const queryResult = await PetsDAO.getSearchedPets(req.query);
     res.send(queryResult);
   } catch (err) {
@@ -37,8 +36,6 @@ const adoptFosterController = async (req, res) => {
     const petData = { petId, status };
     const updateUser = await UsersDAO.updateUserById(userId, petData);
     const updatePetStatus = await PetsDAO.updatePetStatus(petId, status);
-    console.log('USER', updateUser);
-    console.log('STatus', updatePetStatus);
 
     res.send({ updateUser, updatePetStatus });
   } catch (err) {
@@ -47,13 +44,40 @@ const adoptFosterController = async (req, res) => {
   }
 };
 
+const savePet = async (req, res) => {
+  try {
+    const { petId } = req.params;
+    const { userId, action } = req.body;
+    const addedPet = await UsersDAO.addRemoveSavedPet(petId, userId, action);
+    const petStatusChange = await PetsDAO.addRemoveSavedUser(petId, userId, action);
+
+    if (addedPet && petStatusChange) {
+      res.send({ ok: true });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+};
+
 const addPetController = async (req, res) => {
   try {
+    const { picture, weight, height } = req.body;
+    const addedPet = await PetsDAO.addPet({ ...req.body, height: Number(height), weight: Number(weight) });
 
-    const {picture, weight, height} = req.body
-    const addedPet = await PetsDAO.addPet({...req.body, height: Number(height), weight: Number(weight)});
+    res.send({ ...addedPet, picture });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+};
 
-    res.send({...addedPet, picture});
+const getMyPets = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const myPets = await UsersDAO.getMyPets(userId);
+
+    res.send(myPets);
   } catch (err) {
     console.log(err);
     res.status(500).send(err);
@@ -66,4 +90,6 @@ module.exports = {
   getPetByIdController,
   adoptFosterController,
   addPetController,
+  savePet,
+  getMyPets,
 };
