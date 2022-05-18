@@ -24,12 +24,12 @@ export default function MyPetsPage() {
   return (
     <div className='myPetsContainer'>
       <h1>Saved Pets</h1>
-      <div className='saved'>{myPets.mySavedPets && myPets.mySavedPets.length > 0 && myPets.mySavedPets.map((pet) => <Pet pet={pet} />)}</div>
+      <div className='saved'>{myPets.mySavedPets && myPets.mySavedPets.length > 0 && myPets.mySavedPets.map((pet) => <Pet key={pet._id} pet={pet} />)}</div>
       <h1>Adopted Pets</h1>
-      <div className='adopted'>{myPets.mySavedPets && myPets.mySavedPets.length > 0 && myPets.mySavedPets.map((pet) => <Pet pet={pet} />)}</div>
+      <div className='adopted'>{myPets.mySavedPets && myPets.mySavedPets.length > 0 && myPets.mySavedPets.map((pet) => <Pet key={pet._id} pet={pet} />)}</div>
       <h1>Fostered Pets</h1>
       <div className='fostered'>
-        {myPets.myFosteredPets && myPets.myFosteredPets.length > 0 && myPets.myFosteredPets.map((pet) => <Pet pet={pet} />)}
+        {myPets.myFosteredPets && myPets.myFosteredPets.length > 0 && myPets.myFosteredPets.map((pet) => <Pet key={pet._id} pet={pet} />)}
       </div>
     </div>
   );

@@ -144,6 +144,18 @@ class UsersDAO {
       return { error: err };
     }
   }
+
+  static async editUser(userId, userData) {
+    try {
+      console.log(userData);
+      const queryResult = await usersCollection.updateOne({ _id: new ObjectId(userId) }, { $set: { ...userData } }, { upsert: true });
+      console.log(queryResult)
+      return queryResult;
+    } catch (err) {
+      console.log(err);
+      return { error: err };
+    }
+  }
 }
 
 module.exports = UsersDAO;

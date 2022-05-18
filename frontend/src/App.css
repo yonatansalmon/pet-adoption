@@ -38,11 +38,9 @@ body {
 .accordionContainer {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
-.accordion {
-  max-width: 50%;
-}
 .accordion-button {
   min-width: 638px;
 }
@@ -56,6 +54,15 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
+.form-floating {
+  width: 25%;
+}
+
+.basicSearchContainer {
+  display: flex;
+  justify-content: center;
+}
+
 .navbar-nav > a {
   margin: 8px;
   text-decoration: none;
@@ -65,6 +72,8 @@ body {
 .searchContainer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .searchBtn {
@@ -72,7 +81,6 @@ body {
 }
 
 .badgeLabel {
-  align-self: flex-start;
   background-color: #fff !important;
   color: #000 !important;
 }
@@ -146,6 +154,7 @@ body {
 
 .petContainer {
   margin-top: 30px;
+  flex-direction: column;
 }
 
 hr {
@@ -180,11 +189,10 @@ hr {
   justify-content: space-around;
   margin: 16px;
   padding-top: 30px;
+  font-size: 0.85rem;
 }
 
 .box {
-  min-height: 20%;
-  min-width: 20%;
   box-shadow: 0px 3px 9px 2px #000000;
   border-radius: 18px;
   display: flex;
@@ -192,11 +200,16 @@ hr {
   justify-content: space-around;
   align-items: center;
   padding: 8px;
+  margin: 10px;
 }
 
 .buttonsContainer {
   display: flex;
   justify-content: center;
+}
+
+.buttonsContainer > button {
+  margin: 5px;
 }
 
 .petBioContainer {
@@ -205,6 +218,7 @@ hr {
   flex-direction: column;
   align-items: center;
   margin: 30px 50px;
+  max-width: 100%;
 }
 
 .petBioContainer > h4 {
@@ -265,9 +279,6 @@ hr {
 
 .petContainer {
   border: 1px solid #000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .petContainer > img {
@@ -286,7 +297,7 @@ hr {
 }
 
 .MuiCardMedia-media {
-  width: 200px !important
+  width: 200px !important;
 }
 
 .userDetails {

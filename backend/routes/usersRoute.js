@@ -10,6 +10,8 @@ router.post('/login', doesEmailExist, UsersController.login);
 router.post('/', verifyToken, UsersController.getCurrentUser);
 router.get('/all', verifyToken, UsersController.getAllUsers);
 router.get('/:userId', verifyToken, UsersController.getUserById);
+router.put('/:userId', verifyToken, UsersController.editUser);
+
 
 
 module.exports = router;

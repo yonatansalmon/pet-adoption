@@ -1,13 +1,12 @@
-import React from 'react'
-import AddPet from './AddPet'
-import Dashboard from './Dashboard'
+import React from 'react';
+import AddPet from './AddPet';
+import Dashboard from './Dashboard';
 
 export default function AdminPage() {
-    return (
-        <div>
-            <AddPet/>
-            <Dashboard/>
-            
-        </div>
-    )
+  return (
+    <div>
+      <AddPet />
+      <Dashboard />
+    </div>
+  );
 }

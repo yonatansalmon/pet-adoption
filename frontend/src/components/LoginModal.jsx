@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Modal, Button, Form } from 'react-bootstrap';
 import AppContext from '../context/appContext'
 import { useNavigate } from 'react-router-dom';
+import { loginApi } from '../api/usersApi';
 
 export default function LoginModal({ show, handleClose, handleShow }) {
   let navigate = useNavigate();
@@ -18,8 +19,8 @@ export default function LoginModal({ show, handleClose, handleShow }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8000/users/login', user);
-      const { id, firstName, token } = res.data;
+      const { id, firstName, token } = await loginApi(user);
+      console.log(id)
       if (token) {
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('currentUser', JSON.stringify({id, firstName}));

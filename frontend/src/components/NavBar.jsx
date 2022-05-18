@@ -7,15 +7,11 @@ import '../App.css';
 export default function NavBar() {
   const { setCurrentUser, currentUser } = useContext(AppContext);
 
-  useEffect(() => {
-    return () => setCurrentUser(currentUser);
-  }, []);
-
   const logOut = () => {
-    localStorage.clear()
+    localStorage.clear();
+    setCurrentUser('');
+  };
 
-  }
-  
   return (
     <div>
       <Navbar bg='light' expand='lg'>
@@ -32,7 +28,9 @@ export default function NavBar() {
               )}
 
               <Link to='/admin'>Admin</Link>
-              <Link onClick={logOut} to='/'>Log Out</Link>
+              <Link onClick={logOut} to='/'>
+                Log Out
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

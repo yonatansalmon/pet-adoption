@@ -19,8 +19,8 @@ const login = (req, res) => {
 
 const signUp = async (req, res) => {
   try {
-    const { firstName, lastName, email, hashedPassword } = req.body;
-    const user = await UsersDAO.addUser({ firstName, lastName, email, hashedPassword });
+    const { firstName, lastName, email, phone, hashedPassword } = req.body;
+    const user = await UsersDAO.addUser({ firstName, lastName, email, hashedPassword, phone });
     res.send(user);
   } catch (err) {
     res.status(500).send(err.message);
@@ -44,7 +44,7 @@ const getAllUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
   try {
-    const {userId} = req.params
+    const { userId } = req.params;
     const user = await UsersDAO.getUserById(userId);
     res.send(user);
   } catch (err) {
@@ -52,4 +52,16 @@ const getUserById = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, login, signUp, getCurrentUser, getUserById };
+const editUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const userData = req.body;
+    console.log(userData);
+    const user = await UsersDAO.editUser(userId, userData);
+    res.send(user);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+module.exports = { getAllUsers, login, signUp, getCurrentUser, getUserById, editUser };

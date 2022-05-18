@@ -1,8 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { signUpApi } from '../api/usersApi';
 
-import axios from 'axios';
-import AppContext from '../context/appContext';
 export default function SignupModal({ show, handleClose, handleShow }) {
   const [user, setUser] = useState({});
 
@@ -13,8 +12,7 @@ export default function SignupModal({ show, handleClose, handleShow }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http:///localhost:8000/users/signup', user);
-      const { insertedId, acknowledged } = res.data;
+      const { insertedId, acknowledged } = await signUpApi(user)
       if (insertedId && acknowledged) {
         handleClose('signup');
         handleShow('login');

@@ -2,19 +2,21 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import AppContext from '../context/appContext';
 import User from './User';
-
+import { getAllUsersApi } from '../api/usersApi';
 
 export default function Dashboard() {
   const [allUsers, setAllUsers] = useState([]);
   const { token } = useContext(AppContext);
 
-
   const fetchUsers = async () => {
-    const res = await axios.get('http://localhost:8000/users/all', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    if (res.data.length > 0) {
-      setAllUsers(res.data);
+    try {
+      const allUsers = await getAllUsersApi();
+      console.log(allUsers);
+      if (allUsers.length > 0) {
+        setAllUsers(allUsers);
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
   useEffect(() => {

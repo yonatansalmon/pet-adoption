@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { Accordion, FormControl, InputGroup, Badge } from 'react-bootstrap';
+import { Accordion, FormControl, InputGroup, Badge, FloatingLabel, Form } from 'react-bootstrap';
 import { Switch } from 'pretty-checkbox-react';
 import { Slider, MenuItem, Box, InputLabel, Select, Button, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import FormControlMUI from '@mui/material/FormControl';
@@ -19,7 +19,7 @@ export default function Search({ setSearchedPets }) {
   useEffect(() => {
     let uniquePetTypes = petList.map((pet) => pet.type).filter((pet, index, array) => array.indexOf(pet) === index);
     setPetTypes(uniquePetTypes);
-  }, []);
+  }, [petList]);
 
   const handleStatusChange = (e) => {
     setStatus({ status: e.target.value });
@@ -52,29 +52,23 @@ export default function Search({ setSearchedPets }) {
   return (
     <div className='searchContainer'>
       <div className='accordionContainer'>
+        <div className="basicSearchContainer">
+        <FloatingLabel controlId='floatingSelect' label='Pet Type'>
+          <Form.Select label='Type' name='type' onChange={handlePetDataChange} defaultValue={'Any'}>
+            <option value={'Any'}>Any</option>
+            {petTypes &&
+              petTypes.length > 0 &&
+              petTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+          </Form.Select>
+        </FloatingLabel>
+        </div>
+
         <Accordion>
           <Accordion.Item eventKey='0'>
-            <Accordion.Header>Basic Search</Accordion.Header>
-            <Accordion.Body className='accordionBody'>
-              <Box sx={{ maxWidth: 120 }}>
-                <FormControlMUI fullWidth>
-                  <Badge className='badgeLabel'>Pet Type:</Badge>
-                  <MenuItem value={'Any'}></MenuItem>
-                  <Select label='Type' name='type' onChange={handlePetDataChange} defaultValue={'Any'}>
-                    <MenuItem value={'Any'}>Any</MenuItem>
-                    {petTypes &&
-                      petTypes.length > 0 &&
-                      petTypes.map((type) => (
-                        <MenuItem key={type} value={type}>
-                          {type}
-                        </MenuItem>
-                      ))}
-                  </Select>
-                </FormControlMUI>
-              </Box>
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey='1'>
             <Accordion.Header>Advanced Search</Accordion.Header>
             <Accordion.Body>
               <>
