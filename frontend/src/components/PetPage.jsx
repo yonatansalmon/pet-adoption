@@ -54,7 +54,6 @@ export default function PetsPage() {
 
   const savePet = async (e) => {
     try {
-      console.log(e.target.name);
       const res = await axios.put(
         `http://localhost:8000/pets/${petId}/save`,
         { action: e.target.name },

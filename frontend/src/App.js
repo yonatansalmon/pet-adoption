@@ -12,6 +12,7 @@ import PetPage from './components/PetPage';
 import React, { useContext, useState, useEffect } from 'react';
 import AdminPage from './components/AdminPage';
 import MyPetsPage from './components/MyPetsPage';
+import UserPage from './components/UserPage';
 
 function App() {
   const [userList, setUserList] = useState([]);
@@ -60,6 +61,7 @@ function App() {
           <Route path='/mypets' element={<MyPetsPage />}></Route>
           <Route path='/profile' element={<Profile />}></Route>
           <Route path='/pet/:petId' element={<PetPage />}></Route>
+          <Route path='/user/:userId' element={<UserPage/>}></Route>
         </Routes>
       </div>
     </AppContext.Provider>

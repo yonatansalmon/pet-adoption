@@ -262,3 +262,34 @@ hr {
   flex-direction: column;
   align-items: center;
 }
+
+.petContainer {
+  border: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.petContainer > img {
+  max-height: 300px;
+}
+
+.usersContainer {
+  border: 1px solid #000;
+  display: flex;
+  justify-content: space-around;
+}
+
+.usersContainer > i {
+  color: blue;
+  cursor: pointer;
+}
+
+.MuiCardMedia-media {
+  width: 200px !important
+}
+
+.userDetails {
+  border: 1px solid #000;
+  margin-bottom: 30px;
+}

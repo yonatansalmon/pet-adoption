@@ -118,8 +118,27 @@ class UsersDAO {
           })
         ));
 
-
       return { mySavedPets, myFosteredPets, myAdoptedPets };
+    } catch (err) {
+      console.log(err);
+      return { error: err };
+    }
+  }
+
+  static async getUserByEmail(email) {
+    try {
+      const queryResult = await usersCollection.findOne({ email: email });
+      return queryResult;
+    } catch (err) {
+      console.log(err);
+      return { error: err };
+    }
+  }
+
+  static async getAllUsers() {
+    try {
+      const queryResult = await usersCollection.find().toArray();
+      return queryResult;
     } catch (err) {
       console.log(err);
       return { error: err };

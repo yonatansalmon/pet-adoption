@@ -55,7 +55,6 @@ export default function AddPet({ setSearchedPets }) {
       const res = await axios.post('http://localhost:8000/pets/add', formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log(res.data);
       const { acknowledged, insertedId, picture } = res.data;
       if (acknowledged && insertedId) {
         addPet({ ...petData, picture });

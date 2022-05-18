@@ -10,6 +10,11 @@ export default function NavBar() {
   useEffect(() => {
     return () => setCurrentUser(currentUser);
   }, []);
+
+  const logOut = () => {
+    localStorage.clear()
+
+  }
   
   return (
     <div>
@@ -27,6 +32,7 @@ export default function NavBar() {
               )}
 
               <Link to='/admin'>Admin</Link>
+              <Link onClick={logOut} to='/'>Log Out</Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

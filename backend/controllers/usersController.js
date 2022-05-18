@@ -2,10 +2,6 @@ const UsersDAO = require('../DAO/usersDAO');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-const getAllUsers = (req, res) => {
-  res.send('Get on Users');
-};
-
 const login = (req, res) => {
   const { user, password } = req.body;
   const { firstName, email, hashedPassword } = user;
@@ -33,8 +29,27 @@ const signUp = async (req, res) => {
 
 const getCurrentUser = async (req, res) => {
   const { decoded } = req.body;
-  const currentUser = UsersDAO.getCurrentUser(decoded.id);
+  const currentUser = await UsersDAO.getCurrentUser(decoded.id);
   res.send(currentUser);
 };
 
-module.exports = { getAllUsers, login, signUp, getCurrentUser };
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await UsersDAO.getAllUsers();
+    res.send(users);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+const getUserById = async (req, res) => {
+  try {
+    const {userId} = req.params
+    const user = await UsersDAO.getUserById(userId);
+    res.send(user);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+module.exports = { getAllUsers, login, signUp, getCurrentUser, getUserById };

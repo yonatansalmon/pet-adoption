@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import AppContext from '../context/appContext';
+import Pet from './Pet';
 
 export default function MyPetsPage() {
   const [myPets, setMyPets] = useState([]);
@@ -9,18 +10,27 @@ export default function MyPetsPage() {
   useEffect(() => {
     const fetchMyPets = async () => {
       const res = await axios.get(`http://localhost:8000/pets/mypets/${currentUser.id}`);
-      console.log(res.data);
+      setMyPets(res.data);
     };
     if (currentUser.id) {
       fetchMyPets();
     }
   }, [currentUser]);
 
+  useEffect(() => {
+    console.log(myPets);
+  }, [myPets]);
+
   return (
     <div className='myPetsContainer'>
-      <div className='saved'></div>
-      <div className='adopted'></div>
-      <div className='fostered'></div>
+      <h1>Saved Pets</h1>
+      <div className='saved'>{myPets.mySavedPets && myPets.mySavedPets.length > 0 && myPets.mySavedPets.map((pet) => <Pet pet={pet} />)}</div>
+      <h1>Adopted Pets</h1>
+      <div className='adopted'>{myPets.mySavedPets && myPets.mySavedPets.length > 0 && myPets.mySavedPets.map((pet) => <Pet pet={pet} />)}</div>
+      <h1>Fostered Pets</h1>
+      <div className='fostered'>
+        {myPets.myFosteredPets && myPets.myFosteredPets.length > 0 && myPets.myFosteredPets.map((pet) => <Pet pet={pet} />)}
+      </div>
     </div>
   );
 }
