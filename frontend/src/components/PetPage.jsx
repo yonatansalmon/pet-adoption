@@ -6,6 +6,7 @@ import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import '../App.css';
 import Button from '@mui/material/Button';
+import { getPetByIdApi, adoptPetApi, savePetApi } from '../api/petsApi';
 
 export default function PetsPage() {
   const { token, currentUser } = useContext(AppContext);
@@ -15,14 +16,17 @@ export default function PetsPage() {
   const [isSaved, setIsSaved] = useState(true);
 
   const { petId } = useParams();
+  const getPetById = async () => {
+    try {
+      const res = await getPetByIdApi(petId);
+      setPet(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-    const getPetById = async () => {
-      const res = await axios.get(`http://localhost:8000/pets/${petId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setPet(res.data);
-    };
+    console.log(pet)
     getPetById();
   }, []);
 
@@ -36,14 +40,8 @@ export default function PetsPage() {
 
   const adoptPet = async (e) => {
     try {
-      const res = await axios.post(
-        `http://localhost:8000/pets/${petId}/adopt`,
-        { status: e.target.name },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      const { updatePetStatus, updateUser } = res.data;
+      const res = await adoptPetApi(petId, { status: e.target.name });
+      const { updatePetStatus, updateUser } = res;
       if (updatePetStatus.acknowledged && updateUser.acknowledged) {
         setFosteredAdopted(e.target.name);
       }
@@ -54,14 +52,9 @@ export default function PetsPage() {
 
   const savePet = async (e) => {
     try {
-      const res = await axios.put(
-        `http://localhost:8000/pets/${petId}/save`,
-        { action: e.target.name },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      if (res.data.ok) {
+      const res = await savePetApi(petId, { action: e.target.name });
+
+      if (res.ok) {
         setIsSaved(!isSaved);
       }
     } catch (err) {

@@ -5,6 +5,8 @@ import AppContext from '../context/appContext';
 import PetCard from './PetCard';
 import '../App.css';
 import { getUserByIdApi } from '../api/usersApi';
+import { getUserPetsApi } from '../api/petsApi';
+
 
 export default function UserPage() {
   const { userId } = useParams();
@@ -21,11 +23,9 @@ export default function UserPage() {
     }
   };
 
-  const fetUsersPets = async () => {
+  const fetchUsersPets = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/pets/mypets/${userId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await getUserPetsApi(userId);
       const { myAdoptedPets, myFosteredPets, mySavedPets } = res.data;
 
       setUserPets([...myAdoptedPets, ...myFosteredPets, ...mySavedPets]);
@@ -37,7 +37,7 @@ export default function UserPage() {
   useEffect(() => {
     if (token && userId) {
       fetchUserById();
-      fetUsersPets();
+      fetchUsersPets();
     }
   }, [token, userId]);
 

@@ -5,7 +5,7 @@ import { Slider, MenuItem, Box, InputLabel, Select, Button, FormControlLabel, Fo
 import FormControlMUI from '@mui/material/FormControl';
 import AppContext from '../context/appContext';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
-
+import {searchPetApi} from '../api/petsApi'
 import axios from 'axios';
 
 import '../App.css';
@@ -40,11 +40,8 @@ export default function Search({ setSearchedPets }) {
     try {
       const token = JSON.parse(localStorage.getItem('token'));
 
-      const res = await axios.get(
-        `http://localhost:8000/pets?type=${petToSearch.type}&name=${petToSearch.name}&weight=${petToSearch.weight}&height=${petToSearch.height}&adoptionStatus=${petToSearch.status}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setSearchedPets(res.data);
+      const res = await searchPetApi(petToSearch)
+      setSearchedPets(res);
     } catch (err) {
       console.log(err);
     }

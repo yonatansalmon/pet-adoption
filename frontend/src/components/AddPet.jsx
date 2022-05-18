@@ -5,6 +5,7 @@ import { Slider, MenuItem, Box, InputLabel, Select, Button, FormControlLabel, Fo
 import FormControlMUI from '@mui/material/FormControl';
 import AppContext from '../context/appContext';
 import { useNavigate } from 'react-router-dom';
+import { addPetApi } from '../api/petsApi';
 
 import axios from 'axios';
 
@@ -52,10 +53,8 @@ export default function AddPet({ setSearchedPets }) {
       formData.append(key, petData[key]);
     }
     try {
-      const res = await axios.post('http://localhost:8000/pets/add', formData, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const { acknowledged, insertedId, picture } = res.data;
+      const res = await addPetApi(formData);
+      const { acknowledged, insertedId, picture } = res;
       if (acknowledged && insertedId) {
         addPet({ ...petData, picture });
         navigate(`/`);
