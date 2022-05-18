@@ -25,7 +25,6 @@ function App() {
       const tokenLocal = JSON.parse(localStorage.getItem('token'));
       setToken(tokenLocal);
       const allPets = await getAllPetsApi()
-      console.log(allPets);
       setPetList(allPets);
     } catch (err) {
       console.log(err);

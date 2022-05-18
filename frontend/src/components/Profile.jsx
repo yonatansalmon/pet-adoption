@@ -35,7 +35,6 @@ export default function Profile() {
       const { firstName, lastName, email, phone } = user;
       const userInfo = { firstName, lastName, email, phone };
       const editedUser = await editUserApi(currentUser.id, userInfo);
-      console.log(editedUser);
     } catch (err) {
       console.log(err);
     }

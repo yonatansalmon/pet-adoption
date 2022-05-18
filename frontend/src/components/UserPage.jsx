@@ -35,7 +35,6 @@ export default function UserPage() {
   };
 
   useEffect(() => {
-    console.log(userId);
     if (token && userId) {
       fetchUserById();
       fetUsersPets();

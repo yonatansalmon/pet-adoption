@@ -70,7 +70,6 @@ class UsersDAO {
 
   static async addRemoveSavedPet(petId, userId, action) {
     try {
-      console.log(action);
       const isPetExist = await usersCollection.findOne({ _id: new ObjectId(userId), savedPets: { $in: [petId] } });
       if (!isPetExist && action === 'save') {
         const queryResult = await usersCollection.updateOne({ _id: new ObjectId(userId) }, { $push: { savedPets: petId } });
@@ -147,9 +146,7 @@ class UsersDAO {
 
   static async editUser(userId, userData) {
     try {
-      console.log(userData);
       const queryResult = await usersCollection.updateOne({ _id: new ObjectId(userId) }, { $set: { ...userData } }, { upsert: true });
-      console.log(queryResult)
       return queryResult;
     } catch (err) {
       console.log(err);

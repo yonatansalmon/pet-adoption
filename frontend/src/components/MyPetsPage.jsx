@@ -17,10 +17,6 @@ export default function MyPetsPage() {
     }
   }, [currentUser]);
 
-  useEffect(() => {
-    console.log(myPets);
-  }, [myPets]);
-
   return (
     <div className='myPetsContainer'>
       <h1>Saved Pets</h1>

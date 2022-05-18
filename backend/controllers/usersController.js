@@ -56,7 +56,6 @@ const editUser = async (req, res) => {
   try {
     const { userId } = req.params;
     const userData = req.body;
-    console.log(userData);
     const user = await UsersDAO.editUser(userId, userData);
     res.send(user);
   } catch (err) {

@@ -11,7 +11,6 @@ export default function Dashboard() {
   const fetchUsers = async () => {
     try {
       const allUsers = await getAllUsersApi();
-      console.log(allUsers);
       if (allUsers.length > 0) {
         setAllUsers(allUsers);
       }
