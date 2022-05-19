@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import '../App.css';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import AppContext from '../context/appContext';
 import { getUserPetsApi } from '../api/petsApi';
 import { useNavigate } from 'react-router-dom';
@@ -47,6 +47,9 @@ export default function MyPetsPage() {
                 <td>{pet.name}</td>
                 <td>{pet.type}</td>
                 <td>{pet.adoptionStatus}</td>
+                <td className='returnPetBtnContainer'>
+                  <Button className='returnPetBtn'>Unsave Pet</Button>
+                </td>
               </tr>
             ))}
         </tbody>
@@ -71,6 +74,9 @@ export default function MyPetsPage() {
                 <td>{pet.name}</td>
                 <td>{pet.type}</td>
                 <td>{pet.adoptionStatus}</td>
+                <td className='returnPetBtnContainer'>
+                  <Button className='returnPetBtn'>Return Pet</Button>
+                </td>
               </tr>
             ))}
         </tbody>
@@ -95,6 +101,9 @@ export default function MyPetsPage() {
                 <td>{pet.name}</td>
                 <td>{pet.type}</td>
                 <td>{pet.adoptionStatus}</td>
+                <td className='returnPetBtnContainer'>
+                  <Button className='returnPetBtn'>Return Pet</Button>
+                </td>
               </tr>
             ))}
         </tbody>

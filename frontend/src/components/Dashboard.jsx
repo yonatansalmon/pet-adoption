@@ -3,8 +3,8 @@ import '../App.css';
 import AppContext from '../context/appContext';
 import User from './User';
 import { getAllUsersApi } from '../api/usersApi';
-import { Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { Table, Button } from 'react-bootstrap';
 
 export default function Dashboard() {
   const [allUsers, setAllUsers] = useState([]);
@@ -14,7 +14,6 @@ export default function Dashboard() {
   const viewUser = (petId) => {
     navigate(`/pet/${petId}`);
   };
-
 
   const fetchUsers = async () => {
     try {
@@ -50,6 +49,9 @@ export default function Dashboard() {
               <td>{user.lastName}</td>
               <td>{user.email}</td>
               <td>{user.phone}</td>
+              <td className='returnPetBtnContainer'>
+                <Button className='returnPetBtn'>Make Admin</Button>
+              </td>
             </tr>
           ))}
       </thead>

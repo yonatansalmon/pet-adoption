@@ -353,7 +353,8 @@ table {
 table td,
 table th {
   min-width: 220px;
-  /* text-align: center; */
+  text-align: center;
+  vertical-align: middle;
 }
 
 table tr {
@@ -376,4 +377,11 @@ table tr {
 
 .profileContainer > h1 {
   margin-top: 2rem;
+}
+
+
+.returnPetBtnContainer {
+  display: flex;
+  justify-content: center;
+
 }
