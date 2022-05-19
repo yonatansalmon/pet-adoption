@@ -263,9 +263,9 @@ hr {
   align-items: center;
 }
 .addPetHeader > button {
-  font-size:  3rem;
+  font-size: 3rem;
   font-weight: 700;
-  justify-content: center
+  justify-content: center;
 }
 
 .addPetContainer > div {
@@ -275,11 +275,11 @@ hr {
 }
 
 .addPetContainer > input#file {
-  margin: 1.4rem 0
+  margin: 1.4rem 0;
 }
 
- div > .MuiOutlinedInput-root {
-  margin-bottom: .8rem !important;
+div > .MuiOutlinedInput-root {
+  margin-bottom: 0.8rem !important;
 }
 
 div > .petNameInput {
@@ -287,7 +287,7 @@ div > .petNameInput {
 }
 
 .accordion-button::after {
-  margin-left: 1rem
+  margin-left: 1rem;
 }
 
 .addPetBadge {
@@ -379,9 +379,19 @@ table tr {
   margin-top: 2rem;
 }
 
-
 .returnPetBtnContainer {
   display: flex;
   justify-content: center;
+}
 
+.usersTitle {
+  margin-left: 1.2rem;
+  margin-top: 2rem;
+  position: relative;
+  right: 1.5rem;
+  text-align: center;
+}
+
+hr.divider {
+  width: 100%;
 }

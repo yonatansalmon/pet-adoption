@@ -31,6 +31,9 @@ export default function Dashboard() {
     }
   }, [token]);
   return (
+    <>
+
+    <h1 className="usersTitle">Users</h1>
     <Table striped bordered hover size='sm'>
       <thead>
         <tr>
@@ -39,6 +42,8 @@ export default function Dashboard() {
           <th>Last Name</th>
           <th>Email</th>
           <th>Phone</th>
+          <th></th>
+
         </tr>
         {allUsers &&
           allUsers.length > 0 &&
@@ -57,6 +62,6 @@ export default function Dashboard() {
       </thead>
       <tbody></tbody>
     </Table>
-    // <div></div>
+    </>
   );
 }

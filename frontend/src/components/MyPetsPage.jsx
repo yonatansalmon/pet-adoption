@@ -36,6 +36,7 @@ export default function MyPetsPage() {
             <th>Name</th>
             <th>Type</th>
             <th>Status</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -63,6 +64,7 @@ export default function MyPetsPage() {
             <th>Name</th>
             <th>Type</th>
             <th>Status</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -90,6 +92,7 @@ export default function MyPetsPage() {
             <th>Name</th>
             <th>Type</th>
             <th>Status</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
