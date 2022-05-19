@@ -1,12 +1,18 @@
 import { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
+import '../App.css';
+import { Table } from 'react-bootstrap';
 import AppContext from '../context/appContext';
-import Pet from './Pet';
 import { getUserPetsApi } from '../api/petsApi';
+import { useNavigate } from 'react-router-dom';
 
 export default function MyPetsPage() {
   const [myPets, setMyPets] = useState([]);
   const { currentUser } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  const viewPet = (petId) => {
+    navigate(`/pet/${petId}`);
+  };
 
   useEffect(() => {
     const fetchMyPets = async () => {
@@ -22,7 +28,78 @@ export default function MyPetsPage() {
   return (
     <div className='myPetsContainer'>
       <h1>Saved Pets</h1>
-      <div className='saved'>
+
+      <Table striped bordered hover size='sm'>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {myPets.mySavedPets &&
+            myPets.mySavedPets.length > 0 &&
+            myPets.mySavedPets.map((pet) => (
+              <tr onClick={(e) => viewPet(pet._id)}>
+                <td className='petId'>{pet._id}</td>
+                <td>{pet.name}</td>
+                <td>{pet.type}</td>
+                <td>{pet.adoptionStatus}</td>
+              </tr>
+            ))}
+        </tbody>
+      </Table>
+      <h1>Adopted Pets</h1>
+
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {myPets.myAdoptedPets &&
+            myPets.myAdoptedPets.length > 0 &&
+            myPets.myAdoptedPets.map((pet) => (
+              <tr>
+                <td className='petId'>{pet._id}</td>
+                <td>{pet.name}</td>
+                <td>{pet.type}</td>
+                <td>{pet.adoptionStatus}</td>
+              </tr>
+            ))}
+        </tbody>
+      </Table>
+      <h1>Fostered Pets</h1>
+
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {myPets.myFosteredPets &&
+            myPets.myFosteredPets.length > 0 &&
+            myPets.myFosteredPets.map((pet) => (
+              <tr>
+                <td className='petId'>{pet._id}</td>
+                <td>{pet.name}</td>
+                <td>{pet.type}</td>
+                <td>{pet.adoptionStatus}</td>
+              </tr>
+            ))}
+        </tbody>
+      </Table>
+      {/* <div className='saved'>
         {myPets.mySavedPets && myPets.mySavedPets.length > 0 && myPets.mySavedPets.map((pet) => <Pet key={pet._id} pet={pet} />)}
       </div>
       <h1>Adopted Pets</h1>
@@ -32,7 +109,7 @@ export default function MyPetsPage() {
       <h1>Fostered Pets</h1>
       <div className='fostered'>
         {myPets.myFosteredPets && myPets.myFosteredPets.length > 0 && myPets.myFosteredPets.map((pet) => <Pet key={pet._id} pet={pet} />)}
-      </div>
+      </div> */}
     </div>
   );
 }

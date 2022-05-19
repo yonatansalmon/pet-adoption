@@ -5,7 +5,7 @@ import { Slider, MenuItem, Box, InputLabel, Select, Button, FormControlLabel, Fo
 import FormControlMUI from '@mui/material/FormControl';
 import AppContext from '../context/appContext';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
-import {searchPetApi} from '../api/petsApi'
+import { searchPetApi } from '../api/petsApi';
 import axios from 'axios';
 
 import '../App.css';
@@ -40,7 +40,7 @@ export default function Search({ setSearchedPets }) {
     try {
       const token = JSON.parse(localStorage.getItem('token'));
 
-      const res = await searchPetApi(petToSearch)
+      const res = await searchPetApi(petToSearch);
       setSearchedPets(res);
     } catch (err) {
       console.log(err);
@@ -49,19 +49,19 @@ export default function Search({ setSearchedPets }) {
   return (
     <div className='searchContainer'>
       <div className='accordionContainer'>
-        <div className="basicSearchContainer">
-        <FloatingLabel controlId='floatingSelect' label='Pet Type'>
-          <Form.Select label='Type' name='type' onChange={handlePetDataChange} defaultValue={'Any'}>
-            <option value={'Any'}>Any</option>
-            {petTypes &&
-              petTypes.length > 0 &&
-              petTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-          </Form.Select>
-        </FloatingLabel>
+        <div className='basicSearchContainer'>
+          <FloatingLabel controlId='floatingSelect' label='Pet Type'>
+            <Form.Select label='Type' name='type' onChange={handlePetDataChange} defaultValue={'Any'}>
+              <option value={'Any'}>Any</option>
+              {petTypes &&
+                petTypes.length > 0 &&
+                petTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+            </Form.Select>
+          </FloatingLabel>
         </div>
 
         <Accordion>

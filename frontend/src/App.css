@@ -35,10 +35,17 @@ body {
   align-items: center;
 }
 
+.loggedHomePageContainer > h1 {
+  margin: 2rem 0;
+}
+
 .accordionContainer {
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+.accordion {
+  margin: 2rem 0;
 }
 
 .accordion-button {
@@ -255,6 +262,33 @@ hr {
   flex-direction: column;
   align-items: center;
 }
+.addPetHeader > button {
+  font-size:  3rem;
+  font-weight: 700;
+  justify-content: center
+}
+
+.addPetContainer > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addPetContainer > input#file {
+  margin: 1.4rem 0
+}
+
+ div > .MuiOutlinedInput-root {
+  margin-bottom: .8rem !important;
+}
+
+div > .petNameInput {
+  margin: 1.4rem;
+}
+
+.accordion-button::after {
+  margin-left: 1rem
+}
 
 .addPetBadge {
   align-self: center;
@@ -303,4 +337,43 @@ hr {
 .userDetails {
   border: 1px solid #000;
   margin-bottom: 30px;
+}
+
+.myPetsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+table {
+  margin: 2rem 1rem !important;
+  width: 90% !important;
+}
+
+table td,
+table th {
+  min-width: 220px;
+  /* text-align: center; */
+}
+
+table tr {
+  cursor: pointer;
+}
+
+.editProfileForm {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+}
+
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileContainer > h1 {
+  margin-top: 2rem;
 }

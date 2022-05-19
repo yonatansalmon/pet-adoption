@@ -1,12 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import '../App.css';
 import AppContext from '../context/appContext';
 import User from './User';
 import { getAllUsersApi } from '../api/usersApi';
+import { Table } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
   const [allUsers, setAllUsers] = useState([]);
   const { token } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  const viewUser = (petId) => {
+    navigate(`/pet/${petId}`);
+  };
+
 
   const fetchUsers = async () => {
     try {
@@ -23,5 +31,30 @@ export default function Dashboard() {
       fetchUsers();
     }
   }, [token]);
-  return <div>{allUsers && allUsers.length > 0 && allUsers.map((user) => <User key={user._id} user={user} />)}</div>;
+  return (
+    <Table striped bordered hover size='sm'>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+        </tr>
+        {allUsers &&
+          allUsers.length > 0 &&
+          allUsers.map((user) => (
+            <tr onClick={(e) => viewUser(user._id)}>
+              <td className='petId'>{user._id}</td>
+              <td>{user.firstName}</td>
+              <td>{user.lastName}</td>
+              <td>{user.email}</td>
+              <td>{user.phone}</td>
+            </tr>
+          ))}
+      </thead>
+      <tbody></tbody>
+    </Table>
+    // <div></div>
+  );
 }

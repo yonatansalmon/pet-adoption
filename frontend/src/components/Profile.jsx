@@ -40,8 +40,9 @@ export default function Profile() {
     }
   };
   return (
-    <div>
-      <Form onSubmit={handleSubmit}>
+    <div className="profileContainer">
+      <h1>Edit Profile</h1>
+      <Form className="editProfileForm" onSubmit={handleSubmit}>
         <Form.Group className='mb-3' controlId='firstName'>
           <Form.Label>First Name</Form.Label>
           <Form.Control type='text' placeholder='Enter First Name' value={user.firstName} name='firstName' onChange={handleChange} />

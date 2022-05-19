@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { Accordion, FormControl, InputGroup, Badge } from 'react-bootstrap';
-import { Switch } from 'pretty-checkbox-react';
+import { Accordion, FormControl, InputGroup, Badge, FloatingLabel, Form } from 'react-bootstrap';
 import { Slider, MenuItem, Box, InputLabel, Select, Button, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import FormControlMUI from '@mui/material/FormControl';
 import AppContext from '../context/appContext';
@@ -65,109 +64,118 @@ export default function AddPet({ setSearchedPets }) {
   };
   return (
     <div className='addPetContainer'>
-      <Box sx={{ maxWidth: 120 }}>
-        <FormControlMUI fullWidth>
-          <Badge className='badgeLabel addPetBadge'>Pet Type:</Badge>
-          <MenuItem value={'Any'}></MenuItem>
-          <Select label='Type' name='type' onChange={handlePetDataChange} defaultValue={'Any'}>
-            <MenuItem value={'Any'}>Any</MenuItem>
-            {petTypes &&
-              petTypes.length > 0 &&
-              petTypes.map((type) => (
-                <MenuItem key={type} value={type}>
-                  {type}
-                </MenuItem>
-              ))}
-          </Select>
-        </FormControlMUI>
-      </Box>
+      <Accordion>
+        <Accordion.Item eventKey='0'>
+          <Accordion.Header className='addPetHeader'>Add Pet</Accordion.Header>
+          <Accordion.Body>
+            <div className='addPetContainer'>
+              <Box sx={{ maxWidth: 120 }}>
+                <FormControlMUI fullWidth>
+                  <Badge className='badgeLabel addPetBadge'>Pet Type:</Badge>
+                  <MenuItem value={'Any'}></MenuItem>
+                  <Select label='Type' name='type' onChange={handlePetDataChange} defaultValue={'Any'}>
+                    <MenuItem value={'Any'}>Any</MenuItem>
+                    {petTypes &&
+                      petTypes.length > 0 &&
+                      petTypes.map((type) => (
+                        <MenuItem key={type} value={type}>
+                          {type}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </FormControlMUI>
+              </Box>
 
-      <Badge className='badgeLabel addPetBadge'>Pet Name:</Badge>
+              <Badge className='badgeLabel addPetBadge'>Pet Name:</Badge>
 
-      <InputGroup className='petNameInputContainer'>
-        <FormControl
-          placeholder='Pet Name'
-          aria-label='petName'
-          aria-describedby='basic-addon1'
-          name='name'
-          className='petNameInput'
-          onChange={handlePetDataChange}
-        />
-      </InputGroup>
-      <Badge className='badgeLabel addPetBadge'>Adoption Status:</Badge>
-      <div>
-        <RadioGroup className='radioContainer' name='controlled-radio-buttons-group' onChange={handlePetDataChange}>
-          <FormControlLabel value='any' name='adoptionStatus' control={<Radio size='small' />} label='Any' />
+              <InputGroup className='petNameInputContainer'>
+                <FormControl
+                  placeholder='Pet Name'
+                  aria-label='petName'
+                  aria-describedby='basic-addon1'
+                  name='name'
+                  className='petNameInput'
+                  onChange={handlePetDataChange}
+                />
+              </InputGroup>
+              <Badge className='badgeLabel addPetBadge'>Adoption Status:</Badge>
+              <div>
+                <RadioGroup className='radioContainer' name='controlled-radio-buttons-group' onChange={handlePetDataChange}>
+                  <FormControlLabel value='any' name='adoptionStatus' control={<Radio size='small' />} label='Any' />
 
-          <FormControlLabel value='available' name='adoptionStatus' control={<Radio size='small' />} label='Available' />
-          <FormControlLabel value='fostered' name='adoptionStatus' control={<Radio size='small' />} label='Fostered' />
-          <FormControlLabel value='adopted' name='adoptionStatus' control={<Radio size='small' />} label='Adopted' />
-        </RadioGroup>
-      </div>
-      <div>
-        <Badge className='badgeLabel addPetBadge'>Hypoallergenic:</Badge>
+                  <FormControlLabel value='available' name='adoptionStatus' control={<Radio size='small' />} label='Available' />
+                  <FormControlLabel value='fostered' name='adoptionStatus' control={<Radio size='small' />} label='Fostered' />
+                  <FormControlLabel value='adopted' name='adoptionStatus' control={<Radio size='small' />} label='Adopted' />
+                </RadioGroup>
+              </div>
+              <div>
+                <Badge className='badgeLabel addPetBadge'>Hypoallergenic:</Badge>
 
-        <RadioGroup className='radioContainer' name='controlled-radio-buttons-group' onChange={handlePetDataChange}>
-          <FormControlLabel value='yes' name='hypoallergenic' control={<Radio size='small' />} label='Yes' />
-          <FormControlLabel value='no' name='hypoallergenic' control={<Radio size='small' />} label='No' />
-        </RadioGroup>
-      </div>
-      <div>
-        <Badge className='badgeLabel addPetBadge'>Dietary Restrictions:</Badge>
+                <RadioGroup className='radioContainer' name='controlled-radio-buttons-group' onChange={handlePetDataChange}>
+                  <FormControlLabel value='yes' name='hypoallergenic' control={<Radio size='small' />} label='Yes' />
+                  <FormControlLabel value='no' name='hypoallergenic' control={<Radio size='small' />} label='No' />
+                </RadioGroup>
+              </div>
+              <div>
+                <Badge className='badgeLabel addPetBadge'>Dietary Restrictions:</Badge>
 
-        <RadioGroup className='radioContainer' name='controlled-radio-buttons-group' onChange={handlePetDataChange}>
-          <FormControlLabel value='yes' name='dietaryRestrictions' control={<Radio size='small' />} label='Yes' />
-          <FormControlLabel value='no' name='dietaryRestrictions' control={<Radio size='small' />} label='No' />
-        </RadioGroup>
-      </div>
-      <div style={{ maxWidth: '50%', display: 'flex', flexDirection: 'column' }}>
-        <div className='colorContainer'>
-          <Badge className='badgeLabel addPetBadge'>Color:</Badge>
+                <RadioGroup className='radioContainer' name='controlled-radio-buttons-group' onChange={handlePetDataChange}>
+                  <FormControlLabel value='yes' name='dietaryRestrictions' control={<Radio size='small' />} label='Yes' />
+                  <FormControlLabel value='no' name='dietaryRestrictions' control={<Radio size='small' />} label='No' />
+                </RadioGroup>
+              </div>
+              <div style={{ maxWidth: '50%', display: 'flex', flexDirection: 'column' }}>
+                <div className='colorContainer'>
+                  <Badge className='badgeLabel addPetBadge'>Color:</Badge>
 
-          <input onChange={handlePetDataChange} type='color' id='color' name='color' />
-        </div>
-        <Badge className='badgeLabel'>Height:</Badge>
+                  <input onChange={handlePetDataChange} type='color' id='color' name='color' />
+                </div>
+                <Badge className='badgeLabel'>Height:</Badge>
 
-        <Slider
-          size='small'
-          defaultValue={70}
-          value={petData.weight}
-          onChange={handlePetDataChange}
-          aria-label='Small'
-          valueLabelDisplay='auto'
-          className='slider'
-          name='weight'
-        />
-        <Badge className='badgeLabel'>Weight:</Badge>
+                <Slider
+                  size='small'
+                  defaultValue={70}
+                  value={petData.weight}
+                  onChange={handlePetDataChange}
+                  aria-label='Small'
+                  valueLabelDisplay='auto'
+                  className='slider'
+                  name='weight'
+                />
+                <Badge className='badgeLabel'>Weight:</Badge>
 
-        <Slider
-          size='small'
-          defaultValue={70}
-          value={petData.height}
-          onChange={handlePetDataChange}
-          aria-label='Small'
-          valueLabelDisplay='auto'
-          className='slider'
-          name='height'
-        />
-        <Badge className='badgeLabel addPetBadge'>Breed:</Badge>
+                <Slider
+                  size='small'
+                  defaultValue={70}
+                  value={petData.height}
+                  onChange={handlePetDataChange}
+                  aria-label='Small'
+                  valueLabelDisplay='auto'
+                  className='slider'
+                  name='height'
+                />
+                <Badge className='badgeLabel addPetBadge'>Breed:</Badge>
 
-        <InputGroup className=' breedInputContainer my-3 ms-1'>
-          <FormControl
-            placeholder='Breed'
-            aria-label='breed'
-            aria-describedby='basic-addon1'
-            name='breed'
-            className='breed'
-            onChange={handlePetDataChange}
-          />
-        </InputGroup>
-      </div>
+                <InputGroup className=' breedInputContainer my-3 ms-1'>
+                  <FormControl
+                    placeholder='Breed'
+                    aria-label='breed'
+                    aria-describedby='basic-addon1'
+                    name='breed'
+                    className='breed'
+                    onChange={handlePetDataChange}
+                  />
+                </InputGroup>
+              </div>
 
-      <input onChange={handleImageUpload} type='file' accept='image/png, image/gif, image/jpeg' name='file' id='file'></input>
-      <Button className='addPetBtn' variant='contained' onClick={handleSubmit}>
-        Add Pet
-      </Button>
+              <input onChange={handleImageUpload} type='file' accept='image/png, image/gif, image/jpeg' name='file' id='file'></input>
+              <Button className='addPetBtn' variant='contained' onClick={handleSubmit}>
+                Add Pet
+              </Button>
+            </div>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
     </div>
   );
 }
