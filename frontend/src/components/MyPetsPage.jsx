@@ -15,6 +15,7 @@ export default function MyPetsPage() {
   };
 
   useEffect(() => {
+    console.log(myPets)
     const fetchMyPets = async () => {
       const usersPets = await getUserPetsApi(currentUser.id);
       console.log(usersPets);
@@ -43,7 +44,7 @@ export default function MyPetsPage() {
           {myPets.mySavedPets &&
             myPets.mySavedPets.length > 0 &&
             myPets.mySavedPets.map((pet) => (
-              <tr onClick={(e) => viewPet(pet._id)}>
+              <tr key={pet._id} onClick={(e) => viewPet(pet._id)}>
                 <td className='petId'>{pet._id}</td>
                 <td>{pet.name}</td>
                 <td>{pet.type}</td>
@@ -71,7 +72,7 @@ export default function MyPetsPage() {
           {myPets.myAdoptedPets &&
             myPets.myAdoptedPets.length > 0 &&
             myPets.myAdoptedPets.map((pet) => (
-              <tr>
+              <tr key={pet._id}>
                 <td className='petId'>{pet._id}</td>
                 <td>{pet.name}</td>
                 <td>{pet.type}</td>
@@ -99,7 +100,7 @@ export default function MyPetsPage() {
           {myPets.myFosteredPets &&
             myPets.myFosteredPets.length > 0 &&
             myPets.myFosteredPets.map((pet) => (
-              <tr>
+              <tr key={pet._id}>
                 <td className='petId'>{pet._id}</td>
                 <td>{pet.name}</td>
                 <td>{pet.type}</td>
@@ -111,17 +112,6 @@ export default function MyPetsPage() {
             ))}
         </tbody>
       </Table>
-      {/* <div className='saved'>
-        {myPets.mySavedPets && myPets.mySavedPets.length > 0 && myPets.mySavedPets.map((pet) => <Pet key={pet._id} pet={pet} />)}
-      </div>
-      <h1>Adopted Pets</h1>
-      <div className='adopted'>
-        {myPets.myAdoptedPets && myPets.myAdoptedPets.length > 0 && myPets.myAdoptedPets.map((pet) => <Pet key={pet._id} pet={pet} />)}
-      </div>
-      <h1>Fostered Pets</h1>
-      <div className='fostered'>
-        {myPets.myFosteredPets && myPets.myFosteredPets.length > 0 && myPets.myFosteredPets.map((pet) => <Pet key={pet._id} pet={pet} />)}
-      </div> */}
     </div>
   );
 }

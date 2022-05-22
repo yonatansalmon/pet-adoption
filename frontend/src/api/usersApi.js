@@ -1,10 +1,11 @@
 import axios from 'axios';
 const baseUrl = 'http://localhost:8000/users';
 const token = JSON.parse(localStorage.getItem('token'));
+let reqInstance;
 
 const signUpApi = async (user) => {
   try {
-    const res = await axios.post(`${baseUrl}/signup`, user);
+    const res = await reqInstance.post(`${baseUrl}/signup`, user);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -14,6 +15,11 @@ const signUpApi = async (user) => {
 const loginApi = async (user) => {
   try {
     const res = await axios.post(`${baseUrl}/login`, user);
+    reqInstance = axios.create({
+      headers: {
+        Authorization: `Bearer ${res.data.token || token}`,
+      },
+    });
     return res.data;
   } catch (err) {
     console.log(err);
@@ -22,9 +28,9 @@ const loginApi = async (user) => {
 
 const getAllUsersApi = async () => {
   try {
-    const res = await axios.get(`${baseUrl}/all`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+
+    const res = await reqInstance.get(`${baseUrl}/all`);
+    console.log(res);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -33,9 +39,7 @@ const getAllUsersApi = async () => {
 
 const getUserByIdApi = async (userId) => {
   try {
-    const res = await axios.get(`${baseUrl}/${userId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const res = await reqInstance.get(`${baseUrl}/${userId}`);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -44,10 +48,8 @@ const getUserByIdApi = async (userId) => {
 
 const editUserApi = async (userId, userInfo) => {
   try {
-    const res = await axios.put(`${baseUrl}/${userId}`, userInfo, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    return res.data
+    const res = await reqInstance.put(`${baseUrl}/${userId}`, userInfo);
+    return res.data;
   } catch (err) {
     console.log(err);
   }

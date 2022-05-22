@@ -7,7 +7,6 @@ import '../App.css';
 import { getUserByIdApi } from '../api/usersApi';
 import { getUserPetsApi } from '../api/petsApi';
 
-
 export default function UserPage() {
   const { userId } = useParams();
   const [user, setUser] = useState({});
@@ -44,6 +43,7 @@ export default function UserPage() {
   return (
     <>
       <div className='userDetails'>
+        <h1>User Details</h1>
         <h1>{user.firstName}</h1>
         <p>{user.email}</p>
       </div>

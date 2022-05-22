@@ -1,12 +1,17 @@
 import axios from 'axios';
 const baseUrl = 'http://localhost:8000/pets';
-const token = JSON.parse(localStorage.getItem('token'));
+const tokenLocal = JSON.parse(localStorage.getItem('token'));
 
-const headers = { headers: { Authorization: `Bearer ${token}` } };
+let reqInstance;
 
-const getAllPetsApi = async () => {
+const getAllPetsApi = async (token) => {
   try {
-    const res = await axios.get(`${baseUrl}/all`, headers);
+    reqInstance = axios.create({
+      headers: {
+        Authorization: `Bearer ${token || tokenLocal}`,
+      },
+    });
+    const res = await reqInstance.get(`${baseUrl}/all`);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -15,7 +20,7 @@ const getAllPetsApi = async () => {
 
 const addPetApi = async (newPet) => {
   try {
-    const res = await axios.post(`${baseUrl}/add`, newPet, headers);
+    const res = await reqInstance.post(`${baseUrl}/add`, newPet);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -24,7 +29,7 @@ const addPetApi = async (newPet) => {
 
 const getUserPetsApi = async (userId) => {
   try {
-    const res = await axios.get(`${baseUrl}/mypets/${userId}`, headers);
+    const res = await reqInstance.get(`${baseUrl}/mypets/${userId}`);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -33,7 +38,7 @@ const getUserPetsApi = async (userId) => {
 
 const getPetByIdApi = async (petId) => {
   try {
-    const res = await axios.get(`${baseUrl}/${petId}`, headers);
+    const res = await reqInstance.get(`${baseUrl}/${petId}`);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -42,27 +47,27 @@ const getPetByIdApi = async (petId) => {
 
 const adoptPetApi = async (petId, status) => {
   try {
-    const res = await axios.post(`${baseUrl}/${petId}/adopt`, status, headers);
+    const res = await reqInstance.post(`${baseUrl}/${petId}/adopt`, status);
     return res.data;
   } catch (err) {
     console.log(err);
   }
 };
-
 
 const savePetApi = async (petId, action) => {
   try {
-    const res = await axios.put(`${baseUrl}/${petId}/save`, action, headers);
+    const res = await reqInstance.put(`${baseUrl}/${petId}/save`, action);
     return res.data;
   } catch (err) {
     console.log(err);
   }
 };
 
-
 const searchPetApi = async (petToSearch) => {
   try {
-    const res = await axios.get(`${baseUrl}?type=${petToSearch.type}&name=${petToSearch.name}&weight=${petToSearch.weight}&height=${petToSearch.height}&adoptionStatus=${petToSearch.status}`, headers);
+    const res = await reqInstance.get(
+      `${baseUrl}?type=${petToSearch.type}&name=${petToSearch.name}&weight=${petToSearch.weight}&height=${petToSearch.height}&adoptionStatus=${petToSearch.status}`
+    );
     return res.data;
   } catch (err) {
     console.log(err);

@@ -11,13 +11,14 @@ export default function Dashboard() {
   const { token } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const viewUser = (petId) => {
-    navigate(`/pet/${petId}`);
+  const viewUser = (userId) => {
+    navigate(`/user/${userId}`);
   };
 
   const fetchUsers = async () => {
     try {
       const allUsers = await getAllUsersApi();
+      console.log(allUsers);
       if (allUsers.length > 0) {
         setAllUsers(allUsers);
       }
@@ -29,7 +30,7 @@ export default function Dashboard() {
     if (token.length > 0) {
       fetchUsers();
     }
-  }, [token]);
+  }, []);
   return (
     <>
 
@@ -48,7 +49,7 @@ export default function Dashboard() {
         {allUsers &&
           allUsers.length > 0 &&
           allUsers.map((user) => (
-            <tr onClick={(e) => viewUser(user._id)}>
+            <tr key={user._id} onClick={(e) => viewUser(user._id)}>
               <td className='petId'>{user._id}</td>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>

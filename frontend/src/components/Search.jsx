@@ -17,8 +17,10 @@ export default function Search({ setSearchedPets }) {
   const [status, setStatus] = useState({ status: '' });
 
   useEffect(() => {
-    let uniquePetTypes = petList.map((pet) => pet.type).filter((pet, index, array) => array.indexOf(pet) === index);
-    setPetTypes(uniquePetTypes);
+    if (petList) {
+      let uniquePetTypes = petList.map((pet) => pet.type).filter((pet, index, array) => array.indexOf(pet) === index);
+      setPetTypes(uniquePetTypes);
+    }
   }, [petList]);
 
   const handleStatusChange = (e) => {

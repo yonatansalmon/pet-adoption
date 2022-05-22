@@ -4,9 +4,26 @@ import Search from './Search';
 import '../App.css';
 import SearchPage from './SearchPage';
 import SearchedPets from './SearchedPets';
+import { getAllPetsApi } from '../api/petsApi.js';
 
 export default function LoggedHomePage() {
-  const { currentUser, petList } = useContext(AppContext);
+  const { currentUser, petList, setPetList, token } = useContext(AppContext);
+
+  async function getAllPets() {
+    try {
+      const allPets = await getAllPetsApi(token);
+      setPetList(allPets);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    if (token) {
+      getAllPets();
+    }
+  }, [token]);
+
   return (
     <>
       <div className='loggedHomePageContainer'>

@@ -20,17 +20,16 @@ export default function NavBar() {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='me-auto'>
-              {Object.keys(currentUser).length !== 0 && (
+              {currentUser && (
                 <>
                   <Link to='/mypets'>My Pets</Link>
+                  <Link to='/admin'>Admin</Link>
                   <Link to='/profile'>Profile</Link>
+                  <Link onClick={logOut} to='/'>
+                    Log Out
+                  </Link>
                 </>
               )}
-
-              <Link to='/admin'>Admin</Link>
-              <Link onClick={logOut} to='/'>
-                Log Out
-              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

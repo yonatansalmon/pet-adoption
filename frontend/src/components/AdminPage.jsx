@@ -6,7 +6,7 @@ export default function AdminPage() {
   return (
     <div>
       <AddPet />
-      <hr class='divider'></hr>
+      <hr className='divider'></hr>
       <Dashboard />
     </div>
   );

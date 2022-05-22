@@ -11,28 +11,18 @@ import React, { useContext, useState, useEffect } from 'react';
 import AdminPage from './components/AdminPage';
 import MyPetsPage from './components/MyPetsPage';
 import UserPage from './components/UserPage';
-import { getAllPetsApi } from './api/petsApi.js';
+import { useNavigate } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   const [userList, setUserList] = useState([]);
   const [petList, setPetList] = useState([]);
   const [openModal, setIsOpenModal] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(false);
   const [token, setToken] = useState('');
-
-  async function getAllPets() {
-    try {
-      const tokenLocal = JSON.parse(localStorage.getItem('token'));
-      setToken(tokenLocal);
-      const allPets = await getAllPetsApi()
-      setPetList(allPets);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  let navigate = useNavigate();
 
   useEffect(() => {
-    getAllPets();
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser) {
       setCurrentUser(currentUser);
@@ -46,17 +36,45 @@ function App() {
 
   return (
     <AppContext.Provider
-      value={{ userList, setUserList, petList, setPetList, openModal, setIsOpenModal, setCurrentUser, currentUser, token, addPet }}
+      value={{ userList, setUserList, petList, setPetList, openModal, setIsOpenModal, setCurrentUser, currentUser, token, addPet, setToken }}
     >
       <div className='appContainer'>
         <NavBar />
         <Routes>
           <Route path='/' element={currentUser.id ? <LoggedHomePage /> : <NotLoggedHomePage />}></Route>
-          <Route path='/admin' element={<AdminPage />}></Route>
-          <Route path='/mypets' element={<MyPetsPage />}></Route>
+          <Route
+            path='/admin'
+            element={
+              <ProtectedRoute currentUser={currentUser}>
+                <AdminPage />
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route
+            path='/mypets'
+            element={
+              <ProtectedRoute currentUser={currentUser}>
+                <MyPetsPage />{' '}
+              </ProtectedRoute>
+            }
+          ></Route>
           <Route path='/profile' element={<Profile />}></Route>
-          <Route path='/pet/:petId' element={<PetPage />}></Route>
-          <Route path='/user/:userId' element={<UserPage />}></Route>
+          <Route
+            path='/pet/:petId'
+            element={
+              <ProtectedRoute currentUser={currentUser}>
+                <PetPage />
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route
+            path='/user/:userId'
+            element={
+              <ProtectedRoute currentUser={currentUser}>
+                <UserPage />
+              </ProtectedRoute>
+            }
+          ></Route>
         </Routes>
       </div>
     </AppContext.Provider>
