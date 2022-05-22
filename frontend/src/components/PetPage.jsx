@@ -26,7 +26,6 @@ export default function PetsPage() {
   };
 
   useEffect(() => {
-    console.log(pet)
     getPetById();
   }, []);
 

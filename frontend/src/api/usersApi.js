@@ -34,7 +34,6 @@ const loginApi = async (user) => {
 const getAllUsersApi = async () => {
   try {
     const res = await reqInstance.get(`${baseUrl}/all`);
-    console.log(res);
     return res.data;
   } catch (err) {
     console.log(err);

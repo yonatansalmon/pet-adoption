@@ -31,7 +31,6 @@ export default function UserPage() {
   const fetchUsersPets = async () => {
     try {
       const res = await getUserPetsApi(userId, token);
-      console.log(res);
       const { myAdoptedPets, myFosteredPets, mySavedPets } = res;
 
       setUserPets([...myAdoptedPets, ...myFosteredPets, ...mySavedPets]);

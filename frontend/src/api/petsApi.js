@@ -1,7 +1,7 @@
 import axios from 'axios';
 const baseUrl = 'http://localhost:8000/pets';
 const tokenLocal = JSON.parse(localStorage.getItem('token'));
-let token
+let token;
 let reqInstance = axios.create({
   headers: {
     Authorization: `Bearer ${token ? token : tokenLocal}`,
@@ -10,9 +10,8 @@ let reqInstance = axios.create({
 
 const getAllPetsApi = async (token) => {
   try {
-    token = token
+    token = token;
     const res = await reqInstance.get(`${baseUrl}/all`);
-    console.log(res)
     return res.data;
   } catch (err) {
     console.log(err);

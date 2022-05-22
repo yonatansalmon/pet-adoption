@@ -15,10 +15,8 @@ export default function MyPetsPage() {
   };
 
   useEffect(() => {
-    console.log(myPets)
     const fetchMyPets = async () => {
       const usersPets = await getUserPetsApi(currentUser.id);
-      console.log(usersPets);
       setMyPets(usersPets);
     };
     if (currentUser.id) {

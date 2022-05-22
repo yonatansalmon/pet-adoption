@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    const token  = JSON.parse(localStorage.getItem('token'));
+    const token = JSON.parse(localStorage.getItem('token'));
     if (currentUser) {
       setCurrentUser(currentUser);
       setToken(token);
@@ -48,7 +48,7 @@ function App() {
             path='/admin'
             element={
               // <ProtectedRoute currentUser={currentUser}>
-                <AdminPage />
+              <AdminPage />
               // </ProtectedRoute>
             }
           ></Route>
@@ -56,7 +56,7 @@ function App() {
             path='/mypets'
             element={
               // <ProtectedRoute currentUser={currentUser}>
-                <MyPetsPage />
+              <MyPetsPage />
               // </ProtectedRoute>
             }
           ></Route>
@@ -65,7 +65,7 @@ function App() {
             path='/pet/:petId'
             element={
               // <ProtectedRoute currentUser={currentUser}>
-                <PetPage />
+              <PetPage />
               // </ProtectedRoute>
             }
           ></Route>
@@ -73,7 +73,7 @@ function App() {
             path='/user/:userId'
             element={
               // <ProtectedRoute currentUser={currentUser}>
-                <UserPage />
+              <UserPage />
               // </ProtectedRoute>
             }
           ></Route>
