@@ -1,7 +1,12 @@
 import axios from 'axios';
 const baseUrl = 'http://localhost:8000/users';
-const token = JSON.parse(localStorage.getItem('token'));
-let reqInstance;
+const tokenLocal = JSON.parse(localStorage.getItem('token'));
+let token;
+let reqInstance = axios.create({
+  headers: {
+    Authorization: `Bearer ${token ? token : tokenLocal}`,
+  },
+});
 
 const signUpApi = async (user) => {
   try {
@@ -28,7 +33,6 @@ const loginApi = async (user) => {
 
 const getAllUsersApi = async () => {
   try {
-
     const res = await reqInstance.get(`${baseUrl}/all`);
     console.log(res);
     return res.data;

@@ -76,6 +76,7 @@ const getMyPets = async (req, res) => {
   try {
     const { userId } = req.params;
     const myPets = await UsersDAO.getMyPets(userId);
+    console.log(myPets);
 
     res.send(myPets);
   } catch (err) {
