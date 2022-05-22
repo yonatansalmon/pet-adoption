@@ -20,7 +20,7 @@ function App() {
   const [openModal, setIsOpenModal] = useState(false);
   const [currentUser, setCurrentUser] = useState(false);
   const [token, setToken] = useState('');
-  let navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -31,6 +31,12 @@ function App() {
     }
   }, []);
 
+  const timeOut = () => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 200);
+  };
+
   const addPet = (newPet) => {
     const allPets = [...petList, newPet];
     setPetList(allPets);
@@ -38,7 +44,22 @@ function App() {
 
   return (
     <AppContext.Provider
-      value={{ userList, setUserList, petList, setPetList, openModal, setIsOpenModal, setCurrentUser, currentUser, token, addPet, setToken }}
+      value={{
+        userList,
+        setUserList,
+        petList,
+        setPetList,
+        openModal,
+        setIsOpenModal,
+        setCurrentUser,
+        currentUser,
+        token,
+        addPet,
+        setToken,
+        isLoading,
+        setIsLoading,
+        timeOut,
+      }}
     >
       <div className='appContainer'>
         <NavBar />

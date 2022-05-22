@@ -1,23 +1,28 @@
 import { useEffect, useState, useContext } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form, Spinner } from 'react-bootstrap';
 import '../App.css';
-import {getUserByIdApi,  editUserApi } from '../api/usersApi';
+import { getUserByIdApi, editUserApi } from '../api/usersApi';
 
 import axios from 'axios';
 import AppContext from '../context/appContext';
 
 export default function Profile() {
   const [user, setUser] = useState({ firstName: '', lastName: '', email: '', phone: '' });
-  const { currentUser, token } = useContext(AppContext);
+  const { currentUser, token, setIsLoading, isLoading, timeOut } = useContext(AppContext);
 
   const fetchUserById = async () => {
     try {
       const user = await getUserByIdApi(currentUser.id);
       setUser(user);
+      timeOut();
     } catch (err) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    setIsLoading(true);
+  }, []);
 
   useEffect(() => {
     if (token && currentUser) {
@@ -40,29 +45,35 @@ export default function Profile() {
     }
   };
   return (
-    <div className="profileContainer">
-      <h1>Edit Profile</h1>
-      <Form className="editProfileForm" onSubmit={handleSubmit}>
-        <Form.Group className='mb-3' controlId='firstName'>
-          <Form.Label>First Name</Form.Label>
-          <Form.Control type='text' placeholder='Enter First Name' value={user.firstName} name='firstName' onChange={handleChange} />
-        </Form.Group>
-        <Form.Group className='mb-3' controlId='lastName'>
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control type='text' placeholder='Enter Last Name' value={user.lastName} name='lastName' onChange={handleChange} />
-        </Form.Group>
-        <Form.Group className='mb-3' controlId='formBasicEmail'>
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control type='email' placeholder='Enter email' value={user.email} name='email' onChange={handleChange} />
-        </Form.Group>
-        <Form.Group className='mb-3' controlId='phoneNumber'>
-          <Form.Label>Phone Number</Form.Label>
-          <Form.Control type='tel' placeholder='Enter Phone Number' value={user?.phone} name='phone' onChange={handleChange} />
-        </Form.Group>
-        <Button variant='primary' type='submit'>
-          Submit
-        </Button>
-      </Form>
+    <div className='profileContainer'>
+      {!isLoading ? (
+        <>
+          <h1>Edit Profile</h1>
+          <Form className='editProfileForm' onSubmit={handleSubmit}>
+            <Form.Group className='mb-3' controlId='firstName'>
+              <Form.Label>First Name</Form.Label>
+              <Form.Control type='text' placeholder='Enter First Name' value={user.firstName} name='firstName' onChange={handleChange} />
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='lastName'>
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control type='text' placeholder='Enter Last Name' value={user.lastName} name='lastName' onChange={handleChange} />
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='formBasicEmail'>
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control type='email' placeholder='Enter email' value={user.email} name='email' onChange={handleChange} />
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='phoneNumber'>
+              <Form.Label>Phone Number</Form.Label>
+              <Form.Control type='tel' placeholder='Enter Phone Number' value={user?.phone} name='phone' onChange={handleChange} />
+            </Form.Group>
+            <Button variant='primary' type='submit'>
+              Submit
+            </Button>
+          </Form>{' '}
+        </>
+      ) : (
+        <Spinner className='spinner' animation='border' variant='primary' />
+      )}
     </div>
   );
 }

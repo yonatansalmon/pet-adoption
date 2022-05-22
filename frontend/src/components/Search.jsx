@@ -11,7 +11,7 @@ import axios from 'axios';
 import '../App.css';
 
 export default function Search({ setSearchedPets }) {
-  const { petList } = useContext(AppContext);
+  const { petList, timeOut } = useContext(AppContext);
   const [petTypes, setPetTypes] = useState([]);
   const [petData, setPetData] = useState({ type: '', name: '', weight: 70, height: 70 });
   const [status, setStatus] = useState({ status: '' });
@@ -44,6 +44,7 @@ export default function Search({ setSearchedPets }) {
 
       const res = await searchPetApi(petToSearch);
       setSearchedPets(res);
+      timeOut();
     } catch (err) {
       console.log(err);
     }
