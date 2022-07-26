@@ -1,17 +1,18 @@
-const UsersDAO = require('../DAO/usersDAO');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const UsersDAO = require("../DAO/usersDAO");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+require("dotenv").config();
 
 const login = (req, res) => {
   const { user, password } = req.body;
   const { firstName, email, hashedPassword } = user;
   bcrypt.compare(password, hashedPassword, function (err, result) {
     if (err) {
-      res.status(400).send('Passwords Dont Match');
+      res.status(400).send("Passwords Dont Match");
       return;
     }
     if (result) {
-      const token = jwt.sign({ id: user._id }, 'shhhhh');
+      const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
       res.send({ id: user._id, firstName, token });
     }
   });
