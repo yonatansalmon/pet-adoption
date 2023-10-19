@@ -1,12 +1,12 @@
 import React from 'react'
 import { Box, Button, SimpleGrid, ButtonGroup, Menu, MenuItem, MenuGroup, MenuDivider, MenuButton, MenuList } from '@chakra-ui/react'
 import { Input } from '@chakra-ui/react'
-import { UsersContextInstance } from '../contex/UsersContext';
+import { UsersContextInstance } from '../context/UsersContext';
 import { useEffect, useContext } from 'react'
 import { useNavigate, NavLink, } from 'react-router-dom';
 import { SettingsIcon } from '@chakra-ui/icons'
 import { Avatar, AvatarGroup } from '@chakra-ui/react'
-import { AuthContextInstance } from '../contex/AuthContext';
+import { AuthContextInstance } from '../context/AuthContext';
 import { Flex, Stack, Spacer, Show, Hide } from '@chakra-ui/react'
 import axios from 'axios';
 

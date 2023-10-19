@@ -1,9 +1,9 @@
 import React from 'react'
 import { useContext } from 'react'
-import { UsersContextInstance } from '../../contex/UsersContext';
+import { UsersContextInstance } from '../../context/UsersContext';
 import { Card, CardHeader, CardBody, CardFooter, Text, Button, Heading, SimpleGrid, GridItem, Grid, Stack } from '@chakra-ui/react'
 import { useNavigate, NavLink } from 'react-router-dom';
-import { AuthContextInstance } from '../../contex/AuthContext';
+import { AuthContextInstance } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRuler, faShieldDog, faPaw, faWeightScale, faHeart, faGear } from '@fortawesome/free-solid-svg-icons'
 

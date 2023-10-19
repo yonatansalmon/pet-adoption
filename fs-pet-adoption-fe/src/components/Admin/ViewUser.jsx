@@ -8,8 +8,8 @@ import { DeleteIcon } from '@chakra-ui/icons'
 import { useDisclosure } from '@chakra-ui/react'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import {Accordion, Box,AccordionItem, AccordionButton,AccordionPanel,AccordionIcon} from '@chakra-ui/react'
-import { UsersContextInstance } from '../../contex/UsersContext';
-import { PetsContextInstance } from '../../contex/PetsContext';
+import { UsersContextInstance } from '../../context/UsersContext';
+import { PetsContextInstance } from '../../context/PetsContext';
 import PetCardAdminView from './PetCardAdminView';
 
 

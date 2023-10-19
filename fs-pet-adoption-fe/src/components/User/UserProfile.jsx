@@ -2,8 +2,8 @@ import React from 'react'
 import { Avatar, Card, CardHeader, Editable, Heading, CardBody, Box, CardFooter, FormControl, EditableInput, EditableTextarea, Input, Button, FormErrorMessage, EditablePreview, Flex, IconButton, ButtonGroup, Spacer } from '@chakra-ui/react'
 import { CheckIcon, EditIcon, CloseIcon, } from '@chakra-ui/icons'
 import { useEditableControls, } from '@chakra-ui/react'
-import { UsersContextInstance } from '../../contex/UsersContext';
-import { AuthContextInstance } from '../../contex/AuthContext';
+import { UsersContextInstance } from '../../context/UsersContext';
+import { AuthContextInstance } from '../../context/AuthContext';
 import { Stack, Text, HStack, VStack } from '@chakra-ui/react'
 import { useEffect, useState, useContext } from 'react'
 import axios from 'axios';

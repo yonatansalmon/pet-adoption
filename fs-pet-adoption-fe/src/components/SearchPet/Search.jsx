@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { PetsContextInstance } from '../../contex/PetsContext';
+import { PetsContextInstance } from '../../context/PetsContext';
 import { useEffect, useContext } from 'react';
 import axios from 'axios';
 import PetsList from './PetsList';
 import { Button, Select, Input, Stack, InputGroup, InputLeftElement, FormControl, FormLabel, Text, Box, Spacer } from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react'
 import { SearchIcon, } from '@chakra-ui/icons'
-import { AuthContextInstance } from '../../contex/AuthContext';
-import { UsersContextInstance } from '../../contex/UsersContext';
+import { AuthContextInstance } from '../../context/AuthContext';
+import { UsersContextInstance } from '../../context/UsersContext';
 import { Switch } from '@chakra-ui/react'
 import { NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

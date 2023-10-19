@@ -2,9 +2,9 @@ import React from 'react'
 import { Image, Text } from '@chakra-ui/react'
 import {  useNavigate,  } from 'react-router-dom';
 import { useContext, useEffect } from 'react'
-import { UsersContextInstance } from '../contex/UsersContext';
+import { UsersContextInstance } from '../context/UsersContext';
 import HomeLoggedIn from './User/HomeLoggedIn';
-import { AuthContextInstance } from '../contex/AuthContext';
+import { AuthContextInstance } from '../context/AuthContext';
 import HomeAdmin from './Admin/HomeAdmin';
 
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { PetsContextInstance } from '../../contex/PetsContext';
+import { PetsContextInstance } from '../../context/PetsContext';
 import PetCard from '../SearchPet/PetCard'
 import { useContext, useState } from 'react';
 import { Tag, Hide, Show, Button, Spacer, Text } from '@chakra-ui/react';

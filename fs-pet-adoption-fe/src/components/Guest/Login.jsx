@@ -4,7 +4,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
 import { useNavigate } from 'react-router-dom';
-import { UsersContextInstance } from '../../contex/UsersContext';
+import { UsersContextInstance } from '../../context/UsersContext';
 
 
 function Login({ isOpen, onOpen, onClose }) {

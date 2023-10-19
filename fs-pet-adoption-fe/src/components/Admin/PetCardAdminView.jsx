@@ -3,8 +3,8 @@ import { Card, ButtonGroup, CardBody, CardFooter, Image, Button, Text, Stack, He
 import { Badge, Tag } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react'
-import { PetsContextInstance } from '../../contex/PetsContext';
-import { UsersContextInstance } from '../../contex/UsersContext';
+import { PetsContextInstance } from '../../context/PetsContext';
+import { UsersContextInstance } from '../../context/UsersContext';
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 
 

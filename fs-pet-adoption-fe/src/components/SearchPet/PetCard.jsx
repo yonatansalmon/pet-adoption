@@ -2,8 +2,8 @@ import React from 'react'
 import { Tag, Card, ButtonGroup, CardHeader, CardBody, CardFooter, Image, Button, Stack, Heading } from '@chakra-ui/react'
 import {  useNavigate } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react'
-import { PetsContextInstance } from '../../contex/PetsContext';
-import { UsersContextInstance } from '../../contex/UsersContext';
+import { PetsContextInstance } from '../../context/PetsContext';
+import { UsersContextInstance } from '../../context/UsersContext';
 import { ArrowForwardIcon, InfoOutlineIcon } from '@chakra-ui/icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRuler,faShieldDog, faPaw, faWeightScale } from '@fortawesome/free-solid-svg-icons'

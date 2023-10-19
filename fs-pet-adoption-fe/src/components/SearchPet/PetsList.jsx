@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { PetsContextInstance } from '../../contex/PetsContext';
+import { PetsContextInstance } from '../../context/PetsContext';
 import PetCard from './PetCard'
 import {  useContext } from 'react';
 import { SimpleGrid } from '@chakra-ui/react'

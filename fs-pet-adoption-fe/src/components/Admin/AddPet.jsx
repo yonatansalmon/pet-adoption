@@ -6,7 +6,7 @@ import { IconButton } from '@chakra-ui/react'
 import { SmallCloseIcon, MinusIcon } from '@chakra-ui/icons'
 import axios from 'axios';
 import { useToast } from '@chakra-ui/react'
-import { AdminContextInstance } from '../../contex/AdminContext'
+import { AdminContextInstance } from '../../context/AdminContext'
 
 function AddPet() {
 

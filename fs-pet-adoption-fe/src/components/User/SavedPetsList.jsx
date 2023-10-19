@@ -1,5 +1,5 @@
 import React from 'react'
-import { PetsContextInstance } from '../../contex/PetsContext';
+import { PetsContextInstance } from '../../context/PetsContext';
 import SavedPetCard from './SavedPetCard'
 import {  useContext } from 'react';
 

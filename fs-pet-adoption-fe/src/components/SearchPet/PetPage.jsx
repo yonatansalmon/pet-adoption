@@ -4,8 +4,8 @@ import { Image, Button, Text, Stack, Heading, Skeleton } from '@chakra-ui/react'
 import { Badge } from '@chakra-ui/react'
 import axios from 'axios';
 import { Tag, Spacer, Card, CardBody, CardFooter, ButtonGroup } from '@chakra-ui/react'
-import { PetsContextInstance } from '../../contex/PetsContext';
-import { UsersContextInstance } from '../../contex/UsersContext';
+import { PetsContextInstance } from '../../context/PetsContext';
+import { UsersContextInstance } from '../../context/UsersContext';
 import { faRuler, faShieldDog, faPen, faBowlFood, faPaw, faWeightScale } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 

@@ -3,7 +3,7 @@ import { FormControl, FormLabel, FormErrorMessage, FormHelperText, } from '@chak
 import { Input, InputGroup, InputLeftAddon } from '@chakra-ui/react'
 import { Button,  } from '@chakra-ui/react'
 import {  useNavigate } from 'react-router-dom';
-import { UsersContextInstance } from '../../contex/UsersContext';
+import { UsersContextInstance } from '../../context/UsersContext';
 import axios from 'axios';
 
 

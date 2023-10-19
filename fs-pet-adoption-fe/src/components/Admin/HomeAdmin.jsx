@@ -10,8 +10,8 @@ import {
   AccordionPanel,
   AccordionIcon, Spacer,
 } from '@chakra-ui/react'
-import { PetsContextInstance } from '../../contex/PetsContext';
-import { UsersContextInstance } from '../../contex/UsersContext';
+import { PetsContextInstance } from '../../context/PetsContext';
+import { UsersContextInstance } from '../../context/UsersContext';
 import { AddIcon } from '@chakra-ui/icons'
 import PetsListAdminTable from './PetsListAdminTable'
 import UsersListAdminTable from './UsersListAdminTable'

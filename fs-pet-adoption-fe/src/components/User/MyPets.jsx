@@ -2,8 +2,8 @@ import React from 'react'
 import SavedPetsList from './SavedPetsList';
 import FosteredPetsList from './FosteredPetsList';
 import AdoptedPetsList from './AdoptedPetsList';
-import { UsersContextInstance } from '../../contex/UsersContext';
-import { AuthContextInstance } from '../../contex/AuthContext';
+import { UsersContextInstance } from '../../context/UsersContext';
+import { AuthContextInstance } from '../../context/AuthContext';
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Skeleton } from '@chakra-ui/react'
 import {
  Stack, Text,
