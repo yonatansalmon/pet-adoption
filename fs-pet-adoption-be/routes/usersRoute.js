@@ -4,20 +4,20 @@ const router = express.Router()
 const UserController = require('../controllers/UserController')
 const { isUserNew, passwordMatch, encryptPassword, auth } = require('../middleware/validateUserInfo')
 const { upload } = require('../middleware/imagesMiddleware')
+const { userExists } = require('../middleware/userMiddleware')
 
 //Login User
-router.post('/login', UserController.Login)
+router.post('/login', userExists, UserController.login)
 
 //Create User
-router.post('/signup', isUserNew, passwordMatch, encryptPassword, UserController.SignUp);
+router.post('/signup', isUserNew, passwordMatch, encryptPassword, UserController.signup);
 
 //LOG OUT
-router.get('/logout', UserController.Logout);
-
+router.get('/logout', UserController.logout);
 
 
 //READ - get all users
-router.get('/', UserController.getAllUsers);
+// router.get('/', UserController.getAllUsers);
 
 //READ - get user by id
 router.get('/:id', auth, UserController.getUserByIdParams);

@@ -14,8 +14,6 @@ import PetCardAdminView from './PetCardAdminView';
 
 
 function ViewUser() {
-
-
   const [user, setUser] = useState("");
   const [role, setRole] = useState("");
   const [isLoading, setIsLoading] = useState("");
@@ -36,7 +34,6 @@ function ViewUser() {
       fetchSavedPets(id)
       fetchAdoptedPets(id)
       fetchFosteredPets(id)
-
     } catch (err) {
       console.log(err)
     }

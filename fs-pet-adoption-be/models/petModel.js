@@ -6,12 +6,9 @@ const Pet = require('./petSchema')
 const User = require('./userSchema')
 
 
-//findPetUsingId - READ
 async function findPetById(id) {
     try {
-        console.log("Find Pet in DB by id:", id)
         const pet = await Pet.findOne({ _id: id })
-        // console.log(pet)
         return pet;
     }
     catch (err) {
@@ -20,7 +17,6 @@ async function findPetById(id) {
 }
 
 
-//updatePetStatus - Update
 
 
 async function changeToFosteredStatus(req, res, next) {
@@ -29,23 +25,19 @@ async function changeToFosteredStatus(req, res, next) {
             { adoptionStatus: "Fostered" },
             { new: true }
         )
-        console.log(update)
         next();
     } catch (err) {
-        console.log(err)
         res.send(err)
     }
 }
 
 async function changeToAvailableStatus(req, res, next) {
-    console.log(req.params.petId)
-    console.log(req.params.userId)
+
     try {
         const update = await Pet.findOneAndUpdate({ _id: req.params.petId },
             { adoptionStatus: "Available" },
             { new: true }
         )
-        console.log(update)
         next();
     } catch (err) {
         console.log(err)
@@ -61,7 +53,6 @@ async function changeToAvailableStatusById(petId) {
             { adoptionStatus: "Available" },
             { new: true }
         )
-        console.log(update)
         next();
     } catch (err) {
         console.log(err)
@@ -74,14 +65,12 @@ async function changeToAvailableStatusById(petId) {
 
 
 async function changeToAdoptedStatus(req, res, next) {
-    console.log(req.params.petId)
-    console.log(req.params.userId)
+
     try {
         const update = await Pet.findOneAndUpdate({ _id: req.params.petId },
             { adoptionStatus: "Adopted" },
             { new: true }
         )
-        console.log(update)
         next();
     } catch (err) {
         console.log(err)
@@ -95,15 +84,13 @@ async function changeToAdoptedStatus(req, res, next) {
 
 async function removeFromFoster(req, res, next) {
     try {
-        console.log(req.params.userId)
-        console.log(req.params.petId)
+
 
         const userAfterUpdate = await User.updateOne
             ({ _id: req.params.userId },
                 { $pull: { fosteredPets: req.params.petId } },
                 { new: true })
 
-        console.log(userAfterUpdate)
         next()
 
     } catch (err) {
@@ -119,7 +106,6 @@ async function addOwner(req, res, next) {
             filter,
             { owner: req.params.userId },
             { new: true });
-        console.log(petAfterUpdate)
         next();
     } catch (err) {
         console.log(err)
@@ -129,14 +115,12 @@ async function addOwner(req, res, next) {
 }
 
 async function clearOwner(req, res, next) {
-    console.log(req.params.petId)
-    console.log(req.params.userId)
+
     try {
         const update = await Pet.findOneAndUpdate({ _id: req.params.petId },
             { owner: null },
             { new: true }
         )
-        console.log(update)
         next();
     } catch (err) {
         console.log(err)
@@ -151,7 +135,6 @@ async function clearOwnerById(petId) {
             { owner: null },
             { new: true }
         )
-        console.log(update)
         return
 
     } catch (err) {
@@ -163,7 +146,6 @@ async function clearOwnerById(petId) {
 async function addPetModel(newPet) {
 
     try {
-        console.log(newPet)
         const register = new Pet(newPet)
         await register.save()
         return register;
@@ -177,7 +159,6 @@ async function addPetModel(newPet) {
 
 async function deletePetModel(id) {
     const confirm = await Pet.findByIdAndDelete(id)
-    console.log(confirm)
     return confirm
 
 }

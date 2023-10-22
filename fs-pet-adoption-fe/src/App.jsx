@@ -38,7 +38,6 @@ function App() {
               <AdminContext>
                 <Navbar onOpen={onOpen} />
                 <Routes>
-                  {/* //Admin */}
                   <Route path='/' element={<Home />} />
                   <Route
                     path='/admin'
@@ -79,16 +78,13 @@ function App() {
                     />
                   </Route>
 
-                  {/* //Guest */}
                   <Route path='/login' element={<Login onOpen={onOpen} isOpen={isOpen} onClose={onClose} />} />
                   <Route path='/search' element={<Search />} />
 
-                  {/* Pets */}
                   <Route path='/pets'>
                     <Route path=':petId' element={<PetPage />} />
                   </Route>
 
-                  {/* User */}
                   <Route
                     path='/mypets'
                     element={

@@ -61,21 +61,46 @@ const userSchema = new mongoose.Schema({
     type: [Schema.Types.ObjectId],
     ref: 'Pet'
   },
-
-
-
-
 });
+
+
+userSchema.statics.findUserByEmail = async function (email) {
+  try {
+    const emailLowerCase = email.toLowerCase();
+    const user = await this.findOne({ email: emailLowerCase })
+    return user;
+  }
+  catch (err) {
+    console.log(err)
+  }
+}
+
+
+userSchema.statics.createUser = async function (newUser) {
+  try {
+    const register = await this.create(newUser)
+    return register;
+  }
+  catch (err) {
+    console.log(err)
+  }
+}
+
+userSchema.statics.findAll = async function (params) {
+  try {
+    const allUsers = await this.find()
+      .sort({ name: 1 })
+      .skip(params.page > 0 ? ((params.page - 1) * params.limit) : 0)
+      .limit(params.limit)
+    return allUsers;
+  }
+  catch (err) {
+    console.log(err)
+  }
+}
+
 
 module.exports = mongoose.model('User', userSchema)
 
 
 
-//middleware using mongoose
-// userSchema.pre('checkData', async function(){
-//   console.log("checking data")
-// })
-
-// userSchema.post('newData', async function(){
-//   console.log("data is valid")
-// })

@@ -33,6 +33,7 @@ function UsersListAdminTable() {
   const fetchResults = async () => {
     try {
       const res = await axios.get(`http://localhost:8080/usersadmin?page=${page}&limit=10`);
+      console.log(res.data)
       if (res.request.status === 200) {
         setResults(res.data);
       }

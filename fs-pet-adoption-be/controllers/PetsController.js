@@ -10,11 +10,9 @@ const app = express()
 require('dotenv').config()
 
 async function getPetByIdParams(req, res) {
-    console.log(req.params.id)
     const petId = req.params.id;
     const filter = { _id: petId };
     const petInfo = await Pet.findOne(filter);
-    console.log(petInfo)
     res.send(petInfo);
 
 }
@@ -22,7 +20,6 @@ async function getPetByIdParams(req, res) {
 async function getAllPets(req, res) {
 
     try {
-        console.log("Getting all users")
         const result = await Pet.find()
         res.status(200).send(result);
     }
@@ -34,14 +31,13 @@ async function getAllPets(req, res) {
 
 
 //ADD
-async function savePetToUser(req, res) {
+async function savePet(req, res) {
     try {
         const filter = { _id: req.body.userId };
         const userAfterUpdate = await User.findOneAndUpdate(
             filter,
             { $addToSet: { savedPets: req.body.petId } },
             { new: true });
-        console.log(userAfterUpdate)
         const getSavedPets = await User.findOne(filter).populate('savedPets').exec()
         res.status(200).send(getSavedPets)
     } catch (err) {
@@ -50,46 +46,38 @@ async function savePetToUser(req, res) {
     }
 }
 
-async function fosterPetUser(req,res){
-    console.log(req.params.petId)
-    console.log(req.params.userId)
+async function fosterPetUser(req, res) {
     try {
         const filter = { _id: req.params.userId };
         const userAfterUpdate = await User.findOneAndUpdate(
             filter,
             { $addToSet: { fosteredPets: req.params.petId } },
             { new: true });
-        console.log(userAfterUpdate)
         const getFosteredPets = await User.findOne(filter).populate('fosteredPets').exec()
         res.status(200).send(getFosteredPets)
     } catch (err) {
         console.log(err)
 
     }
-     
-    }
+
+}
 
 
-async function adoptPetUser(req,res){
-    console.log(req.params.petId)
-    console.log(req.params.userId)
+async function adoptPetUser(req, res) {
+
     try {
         const filter = { _id: req.params.userId };
         const userAfterUpdate = await User.findOneAndUpdate(
             filter,
             { $addToSet: { adoptedPets: req.params.petId } },
             { new: true });
-        console.log(userAfterUpdate)
         const getAdoptedPets = await User.findOne(filter).populate('adoptedPets').exec()
         res.status(200).send(getAdoptedPets)
     } catch (err) {
         console.log(err)
 
     }
-
-     
-        
-    }
+}
 
 
 
@@ -97,15 +85,12 @@ async function adoptPetUser(req,res){
 //DELETE
 async function removeSavedPet(req, res) {
     try {
-        console.log(req.params.userId)
-        console.log(req.params.petId)
 
         const userAfterUpdate = await User.updateOne
-        ({_id: req.params.userId}, 
-        { $pull: { savedPets : req.params.petId} },
-        {new: true})
+            ({ _id: req.params.userId },
+                { $pull: { savedPets: req.params.petId } },
+                { new: true })
 
-        console.log(userAfterUpdate)
         res.status(200).send(userAfterUpdate.savedPets)
 
     } catch (err) {
@@ -115,15 +100,13 @@ async function removeSavedPet(req, res) {
 }
 async function removeFosteredPet(req, res) {
     try {
-        console.log(req.params.userId)
-        console.log(req.params.petId)
+
 
         const userAfterUpdate = await User.updateOne
-        ({_id: req.params.userId}, 
-        { $pull: { fosteredPets : req.params.petId} },
-        {new: true})
+            ({ _id: req.params.userId },
+                { $pull: { fosteredPets: req.params.petId } },
+                { new: true })
 
-        console.log(userAfterUpdate)
         res.status(200).send(userAfterUpdate.fosteredPets)
 
     } catch (err) {
@@ -133,15 +116,12 @@ async function removeFosteredPet(req, res) {
 }
 async function removeAdoptededPet(req, res) {
     try {
-        console.log(req.params.userId)
-        console.log(req.params.petId)
 
         const userAfterUpdate = await User.updateOne
-        ({_id: req.params.userId}, 
-        { $pull: { adoptedPets : req.params.petId} },
-        {new: true})
+            ({ _id: req.params.userId },
+                { $pull: { adoptedPets: req.params.petId } },
+                { new: true })
 
-        console.log(userAfterUpdate)
         res.status(200).send(userAfterUpdate.adoptedPets)
 
     } catch (err) {
@@ -158,14 +138,10 @@ async function removeAdoptededPet(req, res) {
 
 
 
-module.exports = { getPetByIdParams, getAllPets,
-    savePetToUser, removeSavedPet,
-    adoptPetUser,  removeAdoptededPet,
+module.exports = {
+    getPetByIdParams, getAllPets,
+    savePet, removeSavedPet,
+    adoptPetUser, removeAdoptededPet,
     fosterPetUser, removeFosteredPet,
-     }
+}
 
-// const userAfterRemoving = await User.findOneAndUpdate(
-//     { _id: userId },
-//     { $pull: { savedPets: req.body } }
-// );
-// console.log(userAfterRemoving)

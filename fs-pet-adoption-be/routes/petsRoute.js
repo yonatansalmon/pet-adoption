@@ -23,7 +23,7 @@ router.get('/search/:type', getPetByType)
 
 
 //User functionalities (SavePet, FosterPet and AdoptPet and remove)
-router.post('/save',  PetsController.savePetToUser )
+router.post('/save',  PetsController.savePet )
 router.delete('/:petId/removesaved/:userId',  PetsController.removeSavedPet )
 
 router.put('/:petId/foster/:userId', changeToFosteredStatus, addOwner, PetsController.fosterPetUser)

@@ -6,10 +6,8 @@ const User = require("./userSchema")
 //createUser - CREATE
 async function createNewUserInDB(newUser) {
     try {
-        console.log("create user func")
         const register = new User(newUser)
         await register.save()
-        console.log("New user in createDB:" + register)
         return register;
 
     }
@@ -18,26 +16,8 @@ async function createNewUserInDB(newUser) {
     }
 }
 
-
-//finduserByEmail - READ
-async function findUserByEmail(email) {
-    try {
-        const emailLowerCase = email.toLowerCase();
-        console.log(emailLowerCase)
-        const user = await User.findOne({ email: emailLowerCase })
-        console.log("user was found in db", user)
-        return user;
-    }
-    catch (err) {
-        console.log(err)
-    }
-}
-
-
-//finduserById - READ
 async function findUserById(id) {
     try {
-        console.log(id, typeof id, "MODAL find user by id function")
         const user = await User.findOne({ _id: id })
         return user;
     }
@@ -49,7 +29,6 @@ async function findUserById(id) {
 
 async function deleteUserModel(id) {
     const confirm = await User.findByIdAndDelete(id)
-    console.log(confirm)
     return confirm
 
 }
@@ -58,4 +37,4 @@ async function deleteUserModel(id) {
 
 
 
-module.exports = { createNewUserInDB, findUserByEmail, findUserById, deleteUserModel, }
+module.exports = { createNewUserInDB, findUserById, deleteUserModel, }
