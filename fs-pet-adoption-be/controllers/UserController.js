@@ -64,43 +64,30 @@ async function updatePassword(req, res) {
             new: true
         });
         res.status(200).send(userAfterUpdate)
-
     } catch (err) {
         res.status(500).send(err)
     }
-
-
 }
-
-
-
 
 
 async function updateUserById(req, res) {
     try {
-        const filter = { _id: req.body.id };
-        const update = { ...req.body, picture: req.file.path };
-
-        const userAfterUpdate = await User.findOneAndUpdate(filter, update, {
-            new: true
-        });
-        res.status(200).send(userAfterUpdate)
-
+        if (req.file) {
+            req.body.picture = req.file.path
+        }
+        const updatedUser = await User.updateUser(req.body)
+        res.send(updatedUser)
     } catch (err) {
+        console.log(err)
         res.status(500).send(err.message)
-
     }
-
 }
 
 
 async function updateUserInfo(req, res) {
     try {
-        const userAfterUpdate = await User.findOneAndUpdate({ _id: req.body.id }, req.body, {
-            new: true
-        });
+        const userAfterUpdate = await User.updateUser(req.body.userId, req.body)
         res.status(200).send(userAfterUpdate)
-
     } catch (err) {
         res.status(500).send(err.message)
     }
@@ -114,25 +101,14 @@ function deleteUserById(req, res) {
 async function getUserByIdParams(req, res) {
     try {
         const userId = req.params.id;
-        const filter = { _id: userId };
-        const userInfo = await User.findOne(filter);
+        const userInfo = await User.findUserById(userId);
         res.send(userInfo);
     } catch (err) {
         res.status(500).send(err.message)
 
     }
-
 }
 
-// async function getAllUsers(req, res) {
-//     try {
-//         const result = await User.findAll()
-//         res.send(result);
-//     }
-//     catch (err) {
-//         res.status(500).send(err.message)
-//     }
-// }
 
 async function getUserInfo(req, res) {
     try {
@@ -148,9 +124,8 @@ async function getUserInfo(req, res) {
 async function getSavedPets(req, res) {
     try {
         const userId = req.params.id;
-        const filter = { _id: userId };
-        const getSavedPets = await User.findOne(filter).populate('savedPets').exec()
-        res.send(getSavedPets.savedPets);
+        const pets = await User.getUserPets(userId, 'savedPets')
+        res.send(pets.savedPets);
     } catch (err) {
         res.status(500).send(err.message)
 
@@ -160,9 +135,8 @@ async function getSavedPets(req, res) {
 async function getAdoptedPets(req, res) {
     try {
         const userId = req.params.id;
-        const filter = { _id: userId };
-        const getAdoptedPets = await User.findOne(filter).populate('adoptedPets').exec()
-        res.send(getAdoptedPets.adoptedPets);
+        const pets = await User.getUserPets(userId, 'adoptedPets')
+        res.send(pets.adoptedPets);
     } catch (err) {
         res.status(500).send(err.message)
 
@@ -172,9 +146,8 @@ async function getAdoptedPets(req, res) {
 async function getFosteredPets(req, res) {
     try {
         const userId = req.params.id;
-        const filter = { _id: userId };
-        const getFosteredPets = await User.findOne(filter).populate('fosteredPets').exec()
-        res.send(getFosteredPets.fosteredPets);
+        const pets = await User.getUserPets(userId, 'fosteredPets')
+        res.send(pets.fosteredPets);
     } catch (err) {
         res.status(500).send(err.message)
 

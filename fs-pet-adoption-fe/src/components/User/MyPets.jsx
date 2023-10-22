@@ -16,12 +16,12 @@ function MyPets() {
 
   const {  fetchSavedPets, fetchAdoptedPets, fetchFosteredPets } = useContext(UsersContextInstance);
   const {  loggedInUserID } = useContext(AuthContextInstance);
-  const {  fetchInfo, isLoading, setIsLoading } = useContext(UsersContextInstance);
+  const {  fetchUserInfo, isLoading, setIsLoading } = useContext(UsersContextInstance);
 
 
   useEffect(() => {
     setIsLoading(true)
-    fetchInfo(loggedInUserID)
+    fetchUserInfo(loggedInUserID)
     fetchSavedPets(loggedInUserID)
     fetchAdoptedPets(loggedInUserID)
     fetchFosteredPets(loggedInUserID)

@@ -99,6 +99,40 @@ userSchema.statics.findAll = async function (params) {
   }
 }
 
+userSchema.statics.findUserById = async function (userId) {
+  try {
+    const user = await this.findById(userId)
+    return user;
+  }
+  catch (err) {
+    console.log(err)
+  }
+}
+
+userSchema.statics.getUserPets = async function (userId, petStatus) {
+  try {
+    const pets = await this.findById(userId).populate(petStatus).exec()
+    return pets;
+  }
+  catch (err) {
+    console.log(err)
+  }
+}
+
+userSchema.statics.updateUser = async function (data) {
+  try {
+    const filter = { _id: data.userId };
+    const updatedUser = await this.findOneAndUpdate(filter, data, {
+      new: true
+    });
+    return updatedUser
+  }
+  catch (err) {
+    console.log(err)
+  }
+}
+
+
 
 module.exports = mongoose.model('User', userSchema)
 

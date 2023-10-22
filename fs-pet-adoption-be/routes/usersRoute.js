@@ -16,9 +16,6 @@ router.post('/signup', isUserNew, passwordMatch, encryptPassword, UserController
 router.get('/logout', UserController.logout);
 
 
-//READ - get all users
-// router.get('/', UserController.getAllUsers);
-
 //READ - get user by id
 router.get('/:id', auth, UserController.getUserByIdParams);
 
@@ -30,12 +27,12 @@ router.get('/:id/adoptedpets', UserController.getAdoptedPets)
 
 
 //UPDATE User with formData
-router.post('/update/', auth, upload.single('image'), UserController.updateUserById);
+router.put('/update', upload.single('image'), auth, UserController.updateUserById);
+// router.put('/updateinfo', auth, UserController.updateUserInfo);
 
 
 router.put('/update/password/:id', auth, passwordMatch, encryptPassword, UserController.updatePassword);
 
-router.post('/updateinfo/', auth, UserController.updateUserInfo);
 
 
 // DELETE

@@ -19,12 +19,13 @@ const UsersContext = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchInfo(loggedInUserID);
+    fetchUserInfo(loggedInUserID);
   }, []);
 
-  const fetchInfo = async (id) => {
+  const fetchUserInfo = async (id) => {
     try {
       const res = await axios.get(`http://localhost:8080/users/${id}`, { withCredentials: true });
+      console.log(loggedInUser)
       setLoggedInUser(res.data);
       setSavedPetsList(res.data.savedPets);
       if (res.data.role === 'Admin') {
@@ -76,7 +77,7 @@ const UsersContext = ({ children }) => {
       if (res.data.ok) {
         localStorage.setItem('isLoggedin', res.data.id);
         setLoggedInUserID(res.data.id);
-        fetchInfo(res.data.id);
+        fetchUserInfo(res.data.id);
         navigate('/search');
       }
     } catch (err) {
@@ -90,7 +91,7 @@ const UsersContext = ({ children }) => {
       value={{
         errorMsgClient,
         setErrorMsgClient,
-        fetchInfo,
+        fetchUserInfo,
         loggedInUser,
         setLoggedInUser,
         loginReq,

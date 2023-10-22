@@ -9,8 +9,7 @@ import { faRuler, faShieldDog, faPaw, faWeightScale, faHeart, faGear } from '@fo
 
 
 function HomeLoggedIn() {
-  const { loggedInUser, setLoggedInUser, fetchInfo } = useContext(UsersContextInstance);
-  const { loggedInUserID, } = useContext(AuthContextInstance);
+  const { loggedInUser } = useContext(UsersContextInstance);
   const navigate = useNavigate();
 
 

@@ -16,8 +16,7 @@ import { faRuler, faWeightScale } from '@fortawesome/free-solid-svg-icons'
 function Search() {
   const toast = useToast()
   const { setPetsList } = useContext(PetsContextInstance);
-  const { loggedInUserID } = useContext(AuthContextInstance);
-  const { fetchInfo, errorMsgClient, setErrorMsgClient } = useContext(UsersContextInstance);
+  const { setErrorMsgClient } = useContext(UsersContextInstance);
   const [numResults, setNumResults] = useState("")
   const [numResultsS, setNumResultsS] = useState("")
 
@@ -44,7 +43,6 @@ function Search() {
 
   useEffect(() => {
     setErrorMsgClient("")
-    fetchInfo(loggedInUserID)
   }, [])
 
   async function getPetbyType(e) {

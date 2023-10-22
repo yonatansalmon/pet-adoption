@@ -13,8 +13,8 @@ import axios from 'axios';
 
 function Navbar({ onOpen }) {
 
-  const { loggedInUser, setLoggedInUser, fetchInfo } = useContext(UsersContextInstance);
-  const { setLoggedInUserID, loggedInUserID, isAdmin } = useContext(AuthContextInstance);
+  const { loggedInUser, setLoggedInUser } = useContext(UsersContextInstance);
+  const { setLoggedInUserID, isAdmin } = useContext(AuthContextInstance);
 
   const navigate = useNavigate();
   useEffect(() => {

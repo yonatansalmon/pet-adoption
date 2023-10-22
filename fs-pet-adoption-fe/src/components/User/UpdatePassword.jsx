@@ -11,7 +11,7 @@ import axios from 'axios';
 
 function UpdatePassword() {
 
-    const { loggedInUser, setLoggedInUser, errorMsgClient, setErrorMsgClient, fetchInfo } = useContext(UsersContextInstance);
+    const { loggedInUser, setLoggedInUser, errorMsgClient, setErrorMsgClient, fetchUserInfo } = useContext(UsersContextInstance);
     const { loggedInUserID } = useContext(AuthContextInstance);
 
     const [password, setPassword] = useState("");
@@ -22,7 +22,7 @@ function UpdatePassword() {
 
 
     useEffect(() => {
-        fetchInfo(loggedInUserID)
+        fetchUserInfo(loggedInUserID)
         setErrorMsgClient('')
     }, [])
 

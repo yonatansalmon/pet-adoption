@@ -12,7 +12,7 @@ import HomeAdmin from './Admin/HomeAdmin';
 function Home() {
   const navigate = useNavigate();
 
-  const { loggedInUser, setLoggedInUser, fetchInfo, loginReq  } = useContext(UsersContextInstance);
+  const { fetchUserInfo, loginReq  } = useContext(UsersContextInstance);
   const { loggedInUserID, setLoggedInUserID  } = useContext(AuthContextInstance);
 
 
@@ -25,7 +25,7 @@ function Home() {
     if(userId){
     setLoggedInUserID(userId)
     loginReq(userId)
-    fetchInfo(userId)
+    fetchUserInfo(userId)
     } 
   },[])
 

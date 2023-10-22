@@ -31,9 +31,6 @@ async function tableResults(req, res) {
 async function tableResultsUsers(req, res) {
     try {
         const result = await User.findAll(req.query)
-          
-
-        console.log(result)
         res.status(200).send(result);
     }
     catch (err) {
